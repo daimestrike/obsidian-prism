@@ -22,8 +22,8 @@ const i18nCore = require(path.join(ROOT, 'i18n-core.js'));
 const motionEngine = require(path.join(ROOT, 'motion-engine.js'));
 const pulseVialBridge = require(path.join(ROOT, 'pulse-vial-bridge.js'));
 
-const CANONICAL_9_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-const NON_CJK_LOCALES = ['en', 'ko', 'es', 'fr', 'de', 'tr'];
+const CANONICAL_9_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+const NON_CJK_LOCALES = ['en', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
 const CJK_RE = /[\u3400-\u9FFF\uF900-\uFAFF]/;
 const FORBIDDEN_TERM_RE = /八方旅人|octopath/i;
 
@@ -388,7 +388,7 @@ test('9-locale i18n-ext-beta4 completeness: 0 CJK leakage in non-CJK locales, 0 
   assert.ok(keys.length >= 16);
 
   for (const k of keys) {
-    assert.equal(i18nExt.TABLE[k].length, 9, `Key ${k} must have exactly 9 locale entries`);
+    assert.equal(i18nExt.TABLE[k].length, 10, `Key ${k} must have exactly 10 locale entries`);
   }
 
   for (const loc of CANONICAL_9_LOCALES) {
@@ -562,7 +562,7 @@ test('Ch1 / Ch9 / configRefresh budgets, live incremental refresh, full teardown
   assert.ok(ch1AutoBytes < 390000, `Ch1 auto (${ch1AutoBytes} B) must stay < 390,000 B`);
   const ch9Expr = cdp.buildSettingsChannelExpression(null, { noDiskCache: true });
   const ch9Bytes = Buffer.byteLength(ch9Expr, 'utf8');
-  assert.ok(ch9Bytes < 512000, `Ch9 settings (${ch9Bytes} B) must stay < 512,000 B`);
+  assert.ok(ch9Bytes <= 530 * 1024, `Ch9 settings (${ch9Bytes} B) must stay <= 542,720 B`);
   assert.ok(ch9Expr.includes('__agPrismI18nExtBeta4') && ch9Expr.includes('__agPrismSettingsExtBeta4'));
 
   const refreshExpr = cdp.buildConfigRefreshExpression({

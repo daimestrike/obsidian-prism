@@ -12,7 +12,7 @@ const INLINE_DIFF_BINDING = '__agPrismInlineDiffCall';
 const WALLPAPER_BINDING = '__agPrismWallpaperCall';
 const SUGGESTER_BINDING = '__agPrismSuggestCall';
 
-const CANONICAL_LANG_VALUES = Object.freeze(['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr']);
+const CANONICAL_LANG_VALUES = Object.freeze(['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru']);
 const ON_OFF_VALUES = Object.freeze(['on', 'off']);
 const AUTO_ON_OFF_VALUES = Object.freeze(['auto', 'on', 'off']);
 

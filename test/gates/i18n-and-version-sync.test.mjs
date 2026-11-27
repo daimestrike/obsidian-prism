@@ -17,8 +17,8 @@ const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const i18nCore = require(path.join(ROOT, 'i18n-core.js'));
 const i18nLocales = require(path.join(ROOT, 'i18n-locales.js'));
 
-const CANONICAL_9_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-const NON_CJK_LOCALES = ['en', 'ko', 'es', 'fr', 'de', 'tr'];
+const CANONICAL_9_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+const NON_CJK_LOCALES = ['en', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
 const CJK_RE = /[\u3400-\u9FFF\uF900-\uFAFF]/;
 const FORBIDDEN_TERM_RE = /八方旅人|octopath/i;
 

@@ -11,6 +11,7 @@
 | [ADR-004](./ADR-004-ch1-budget-and-single-channel-registry.md) | Ch1 `< 390 KB` 预算与唯一 `CHANNEL_REGISTRY` | 铁律 ③ ④ · [`bundle-budget.test.mjs`](../../test/gates/bundle-budget.test.mjs) |
 | [ADR-005](./ADR-005-explicit-fsm-and-composition.md) | 显式组合子系统、FSM 熔断与 SHA-256 内容指纹 | 铁律 ⑤ · [`architecture-fitness.test.mjs`](../../test/gates/architecture-fitness.test.mjs) |
 | [ADR-006](./ADR-006-zero-innerhtml-and-cssom-hygiene.md) | 运行期 0 `innerHTML`、CSSOM 卫生与桥接观测隔离 | 铁律 ⑥ · [`architecture-fitness.test.mjs`](../../test/gates/architecture-fitness.test.mjs) |
+| [ADR-007](./ADR-007-tenth-locale-russian.md) | 第十语种 `ru` 与脉冲桥 / 遗留体积按实测上调 | 铁律 ③ ④ · [`bundle-budget.test.mjs`](../../test/gates/bundle-budget.test.mjs) |
 
 ## 新增 ADR 流程
 

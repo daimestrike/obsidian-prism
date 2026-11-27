@@ -79,6 +79,7 @@
     fr: { accept: 'Utiliser la suggestion de prompt' },
     de: { accept: 'Vorgeschlagenen Prompt verwenden' },
     tr: { accept: 'Önerilen istemi kullan' },
+    ru: { accept: "Использовать предложенный промпт" },
   };
 
   // 运行时高频幽灵建议样式：严格纯 ASCII、0 :has()、行高对齐主输入框 22px，仅在 enabled === true 时注入

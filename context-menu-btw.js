@@ -40,6 +40,7 @@
     fr: 'Copier|Copié|Ouvrir le chat latéral|Demander /btw sur la sélection|Planifier la sélection|Compacter le contexte|Enregistrer les acquis|Alignement grill-me|Brouillon en cours ; envoyez ou effacez d’abord|Ouvrez d’abord une conversation|Zone de saisie introuvable|Clic droit : menu natif',
     de: 'Kopieren|Kopiert|Seitenchat öffnen|/btw zur Auswahl fragen|Auswahl planen|Kontext komprimieren|Erkenntnisse speichern|Grill-me-Abgleich|Entwurf vorhanden; zuerst senden oder leeren|Bitte zuerst ein Gespräch öffnen|Eingabefeld nicht gefunden|Rechtsklick: Nativ',
     tr: 'Kopyala|Kopyalandı|Yan sohbeti aç|Seçim için /btw sor|Seçimi planla|Bağlamı sıkıştır|Öğrenimleri kaydet|Grill-me hizalaması|Taslak var; önce gönderin veya temizleyin|Önce bir sohbet açın|Giriş kutusu bulunamadı|Sağ tık: yerel',
+    ru: 'Копировать|Скопировано|Открыть боковой чат|Спросить /btw по выделению|План по выделению|Сжать контекст|Зафиксировать опыт|Согласование вопросами|В поле ввода есть черновик; сначала отправьте или очистите|Сначала откройте диалог|Поле ввода не найдено|Правый щелчок: системное меню',
   };
   for (const k in I18N) I18N[k] = I18N[k].split('|');
 
@@ -58,6 +59,7 @@
     if (/^fr/.test(s) || s === 'french') return 'fr';
     if (/^de/.test(s) || s === 'german') return 'de';
     if (/^tr/.test(s) || s === 'turkish' || s === 'türkçe' || s === 'turkce') return 'tr';
+    if (/^ru/.test(s) || s === 'русский') return 'ru';
     return 'en';
   };
   const sa = (el, o) => { if (el?.setAttribute) for (const k in o) el.setAttribute(k, o[k]); return el; };

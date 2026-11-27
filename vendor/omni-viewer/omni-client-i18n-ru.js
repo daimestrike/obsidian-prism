@@ -1,0 +1,5 @@
+// Russian UI slice. Sets __agOmniRu for browser bundles and module.exports for Node.
+(function (g, v) {
+  if (g) g.__agOmniRu = v;
+  if (typeof module === 'object' && module.exports) module.exports = v;
+})(typeof globalThis !== 'undefined' ? globalThis : null, {"omniOpenBuiltin":"Открыть во встроенной панели","omniOpenPreview":"Предпросмотр в редакторе","omniOpenExternal":"Открыть в приложении по умолчанию","omniOpenBrowser":"Открыть в системном браузере","omniRevealFolder":"Показать в папке","omniInsertMention":"Вставить как @упоминание","omniCopyLink":"Копировать URL ссылки","omniCopyAbsPath":"Копировать абсолютный путь","omniCopyRelPath":"Копировать относительный путь","omniCopyText":"Копировать текст","omniZoomDiagram":"Увеличить схему","omniViewWorkbench":"Вид редактора","omniViewRaw":"Исходный вид","omniViewPreview":"Предпросмотр","omniViewSource":"Исходник","omniSandboxIsolated":"Песочница изолирована","omniCopied":"Скопировано","omniMermaidDiagram":"Диаграмма Mermaid","omniMermaidSvg":"Mermaid SVG","omniHintClick":"Щелчок","omniHintCtrlClick":"Ctrl+щелчок"});

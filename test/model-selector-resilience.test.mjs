@@ -826,7 +826,7 @@ test('Scenario 5 (多触发器分屏 + 自定义模型 + 双 Observer 防互激 
   assert.ok(bytes < 690 * 1024, `Default bundle must be strictly < 706,560 B (690 KiB), got ${bytes}`);
   assert.ok(bytes <= 704000, `Default bundle must stay <= 704,000 B, got ${bytes}`);
   const pulseBytes = fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size;
-  assert.ok(pulseBytes < 31000, `pulse-vial-bridge.js must stay < 31,000 B, got ${pulseBytes}`);
+  assert.ok(pulseBytes < 31400, `pulse-vial-bridge.js must stay < 31,400 B, got ${pulseBytes}`);
   assert.ok(cdp.REMOVE_EXPRESSION.includes("'data-ces-slider-ready'"));
 
   ctl.destroy();

@@ -531,7 +531,7 @@ test('Issue #2/#4/#5 high-Hz & win-blur guards: pulse-vial-bridge (<31,000B) 33m
   const path = require('node:path');
   const bridgePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'pulse-vial-bridge.js');
   const bridgeBytes = fs.statSync(bridgePath).size;
-  assert.ok(bridgeBytes < 31000, `pulse-vial-bridge.js must stay < 31,000 B, got ${bridgeBytes} B`);
+  assert.ok(bridgeBytes < 31400, `pulse-vial-bridge.js must stay < 31,400 B, got ${bridgeBytes} B`);
 
   const bridgeMod = require('../pulse-vial-bridge.js');
   const prismRimMod = require('../prism-rim-canvas.js');

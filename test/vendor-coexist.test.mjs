@@ -2790,7 +2790,7 @@ test('Issue #81: inline-fallback TIER_CSS uses --pt-c instead of --c so external
   const fbSrc = fs.readFileSync(fbPath, 'utf8');
   const bridgeBytes = fs.statSync(bridgePath).size;
 
-  assert.ok(bridgeBytes < 31000, `pulse-vial-bridge.js must stay < 31,000 B (got ${bridgeBytes})`);
+  assert.ok(bridgeBytes < 31400, `pulse-vial-bridge.js must stay < 31,400 B (got ${bridgeBytes})`);
   assert.equal(/--c\s*:/.test(fbSrc), false, 'inline-fallback.js must not declare --c: CSS custom property');
   assert.equal(/var\(\s*--c\s*[,)]/.test(fbSrc), false, 'inline-fallback.js must not reference var(--c)');
   assert.ok(fbSrc.includes('--pt-c:var(--pv-tint,var(--pulse-ring,#3186ff))'), 'TIER_CSS must declare isolated --pt-c');

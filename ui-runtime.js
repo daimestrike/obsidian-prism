@@ -814,7 +814,7 @@ if (!force && key === lastAbsorbedSyncKey) return;
 lastAbsorbedSyncKey = key;
 const run = (fn) => { try { fn(); } catch {} };
 run(() => tel?.sync?.(cfg)); run(() => eff?.sync?.(cfg));
-run(() => { if (hiMode === 'auto' && curLang !== 'zh-CN' && curLang !== 'tr') { hiInst?.destroy?.(); ra(de(), 'data-ag-prism-host-i18n'); } else if (isFn(hiInst?.setMode)) hiInst.setMode(hiMode === 'on' ? 'on' : hiMode === 'off' ? 'off' : 'auto'); });
+run(() => { if (hiMode === 'auto' && curLang !== 'zh-CN' && curLang !== 'tr' && curLang !== 'ru') { hiInst?.destroy?.(); ra(de(), 'data-ag-prism-host-i18n'); } else if (isFn(hiInst?.setMode)) hiInst.setMode(hiMode === 'on' ? 'on' : hiMode === 'off' ? 'off' : 'auto'); });
 run(() => th?.sync?.(cfg)); run(() => (getOmniMode() === 'off' ? omni?.destroy?.() : omni?.sync?.(cfg, meta)));
 run(() => sb?.sync?.(cfg, sbMeta)); run(() => ctxMenu?.sync?.({ enabled: ctxEnabled, lang: curLang, motionLevel: motionLv }));
 run(() => byId(SETTINGS_SEC_ID)?.__prismMountThoughtUi?.());

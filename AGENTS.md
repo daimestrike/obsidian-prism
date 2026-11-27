@@ -37,7 +37,7 @@
 ### ① 新增功能、按需通道与配置契约
 - **唯一通道注册**：仅在 [`src/channels/registry.cjs`](./src/channels/registry.cjs) 注册新通道（配齐 `configKeys`、`files`、`budgetBytes`、`shouldEnable()`、`build()` 及 [`src/channels/channel-teardowns.cjs`](./src/channels/channel-teardowns.cjs) 清理函数）；开关 `off` 时必须 **0 编译、0 注入、0 常驻内存**；严禁把非首屏重模块硬塞进 Channel 1（[`ui-runtime.js`](./ui-runtime.js)）。
 - **配置单源同步**：在 [`src/config/schema.cjs`](./src/config/schema.cjs) 声明键、默认值与校验器，同步更新 [`config.example.json`](./config.example.json)，并检查原生端 [`installer/common/CdpClient.cs`](./installer/common/CdpClient.cs) 与 [`installer/macos/Common/CdpClient.swift`](./installer/macos/Common/CdpClient.swift) 配置同步状态，防止漂移扩大。
-- **9 语种一等公民**：完整覆盖 `zh-CN` / `zh-TW` / `en` / `ja` / `ko` / `es` / `fr` / `de` / `tr`（非 CJK 语种 **0 汉字**，严禁新增 `yue` 独立词典或语言选项，严禁出现禁用项目外游戏术语）。
+- **10 语种一等公民**：完整覆盖 `zh-CN` / `zh-TW` / `en` / `ja` / `ko` / `es` / `fr` / `de` / `tr` / `ru`（非 CJK 语种 **0 汉字**，严禁新增 `yue` 独立词典或除此之外的语言选项，严禁出现禁用项目外游戏术语）。
 
 ### ② 宿主兼容性修复
 - 改动前先跑 `node scripts/probe-host-compat.mjs --live`（或 `--snapshot`）定位真实 DOM 锚点，**禁止凭猜想写选择器**；
@@ -66,9 +66,9 @@
 编写与审查代理交卷前必须逐项核对（任一失败即退回）：
 
 - [ ] **1. 分层与边界**：0 外部依赖、`src/` 单向无环、`.cjs`/`.mjs` 不混用、新建模块 `<= 800` 行 / `<= 40 KB`；
-- [ ] **2. 通道与预算**：`Ch1` 全 9 语（+`auto`）`< 390,000 B`、`configRefresh < 4,096 B`、各通道不破预算、开关 `off` 为 `0 B`；
+- [ ] **2. 通道与预算**：`Ch1` 全 10 语（+`auto`）`< 390,000 B`、`pulse-vial-bridge.js < 31,400 B`、`configRefresh < 4,096 B`、各通道不破预算、开关 `off` 为 `0 B`；
 - [ ] **3. 体验红线**：无默认档低帧 `steps()`、无默认砍核心毛玻璃/滚轮闪屏、无切窗冻死宿主运行圈、无破 `sticky` 的 `content-visibility: auto`；
-- [ ] **4. 契约与 9 语种**：`schema.cjs` 与 `config.example.json` 100% 对齐、9 语种齐全且非 CJK 0 汉字、0 `yue` 独立词典；
+- [ ] **4. 契约与 10 语种**：`schema.cjs` 与 `config.example.json` 100% 对齐、10 语种齐全且非 CJK 0 汉字、0 `yue` 独立词典；
 - [ ] **5. 安全与原子落盘**：0 `innerHTML`、0 `:has(`、0 新增 AV 红线、保护全部用户配置与壁纸资产；
 - [ ] **6. 测试与卫生**：**按模块域命名测试（严禁新增 `v10x-*` / `w5-*` / `w6-*` / `issueXX-*`）**、UTF-8 无 BOM + LF、Markdown 相对链接全部有效。
 

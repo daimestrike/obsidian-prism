@@ -4,6 +4,7 @@
 // - Live Upstream Discovery: GET /v1/models & real-time latency test message
 // - Privacy & Open-Source Cleanliness: Keys & custom prompts live strictly in ~/.gemini/config/ (0600), NEVER in Git!
 
+import { RU_PROMPTS, RU_LANG_NAME, RU_BOUNDARY } from './prompts-ru.mjs';
 import { execFile, execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import dns from 'node:dns';
@@ -84,6 +85,7 @@ export const SYSTEM_PROMPTS_BY_LANG = Object.freeze({
     concise:
       'Du bist ein effizienter Assistent für prägnante Übersetzungen technischer Überlegungen. Fasse die eingegebene Gedankenkette klar und knapp in der Ich-Form auf Deutsch zusammen. Bewahre alle exakten Dateipfade, Zeilennummern, wichtigen Code-Bezeichner und Kernbegründungen ohne zusätzliche Überschriften oder Fülltext.',
   }),
+  ru: RU_PROMPTS,
   tr: Object.freeze({
     technical:
       'Kıdemli bir yazılım mühendisliği akıl yürütme çeviri asistanısın. Girilen düşünce zincirini (Chain-of-Thought) doğal ve net birinci tekil şahıs Türkçe mühendislik notlarına doğru biçimde çevir. İngilizce veya diğer dillerdeki tüm paragraf ve cümleleri eksiksiz olarak Türkçeye çevir. Tüm kod tanımlayıcılarını, fonksiyon/sınıf adlarını, dosya yollarını, satır numaralarını (örn. path/file.js#L12), terminal komutlarını ve ters tırnak biçimlendirmesini aynen koru. Selamlama veya başlık ekleme; yalnızca çevrilmiş akıl yürütme metnini döndür.',
@@ -102,6 +104,7 @@ const GTX_TARGET_LANG_MAP = Object.freeze({
   fr: 'fr',
   de: 'de',
   tr: 'tr',
+  ru: 'ru',
 });
 
 export function normalizeTargetLang(lang) {
@@ -116,6 +119,7 @@ export function normalizeTargetLang(lang) {
   if (/^fr(?:\b|-)/.test(s) || s === 'french') return 'fr';
   if (/^de(?:\b|-)/.test(s) || s === 'german') return 'de';
   if (/^tr(?:\b|-)/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+  if (/^ru(?:\b|-)/.test(s) || s === 'russian' || s === 'русский') return 'ru';
   if (/^en(?:\b|-)/.test(s) || s === 'english') return 'en';
   return 'zh-CN';
 }
@@ -445,7 +449,8 @@ export function isAlreadyTargetLang(text, targetLang = 'zh-CN') {
   }
 
   // zh-TW 面对简体中文思考链时允许 AI 简转繁，或机翻转繁，不当作 zh-CN 草率跳过
-  if (tl === 'zh-TW') {
+  if (tl === 'ru') return RU_BOUNDARY;
+    if (tl === 'zh-TW') {
     return false;
   }
 
@@ -2564,6 +2569,7 @@ export class ThoughtTranslatorService {
         fr: 'French (Français)',
         de: 'German (Deutsch)',
         tr: 'Turkish (Türkçe)',
+        ru: RU_LANG_NAME,
       };
       return `${cp}\n\n[Output Language Requirement] Target output language MUST be ${langNames[tl] || tl}. When the source mixes languages, preserve already-natural target-language parts and translate all foreign paragraphs completely.`;
     }
@@ -3549,7 +3555,7 @@ export class ThoughtTranslatorService {
     const prose = stripNonProseForLangCheck(p).trim();
     if (!prose) return true;
     const tl = normalizeTargetLang(targetLang);
-    if (tl === 'zh-TW' || tl === 'es' || tl === 'fr' || tl === 'de' || tl === 'tr') {
+    if (tl === 'zh-TW' || tl === 'es' || tl === 'fr' || tl === 'de' || tl === 'tr' || tl === 'ru') {
       // 繁中及西/法/德/土语机翻需经过 GTX 完整转换，仅纯符号/无正文跳过
       return false;
     }

@@ -76,6 +76,8 @@
       'Model yok',
     ],
   };
+try{globalThis.__agThSetRu||require('./thought-settings-i18n-ru.js')}catch{}
+  if(globalThis.__agThSetRu&&globalThis.__agThSetRu.wb)WB_DATA.ru=globalThis.__agThSetRu.wb;
   const WORKBENCH_I18N = Object.fromEntries(
     Object.entries(WB_DATA).map(([lk, [strRow, fmts, f0, f1]]) => {
       const vals = strRow.split('|');
@@ -100,6 +102,7 @@
     de: 'Gesprächstitel automatisch übersetzen|Übersetzt englische Titel nur in der Darstellung (standardmäßig aus); verändert keine Sitzungsdaten und stellt Originale beim Ausschalten wieder her.|Diagnose|Diagnose läuft…|1. Daemon-Bridge|Online|Offline (Daemon getrennt)|2. Modus & Config|KI-Feinschliff|Maschinell|Aus|Profil bereit|Unvollständig|Ungültige Base URL|Modell-ID fehlt|API-Schlüssel fehlt|3. Proxy & Verbindung|Verbunden|Übersprungen (Übersetzer aus)|Nicht verfügbar (Bridge offline)|Nicht erreichbar|Direkt / Kein Proxy|OS-Proxy|4. Fehlerbehebung|Alle Prüfungen bestanden. Englischen Denkblock aufklappen, um Übersetzungen zu sehen.|Führe den Statusbefehl unten im Terminal aus und starte Antigravity über die gepatchte Verknüpfung neu.|Upstream-Auth fehlgeschlagen. API-Schlüssel, Kontingent und Modellrechte prüfen.|Timeout oder Proxy nicht erreichbar. Auto / Benutzerdef. / Direkt wechseln und Port prüfen.|Gültige Base URL, Modell-ID und API-Schlüssel ergänzen oder auf kostenlose MT wechseln.|Statusbefehl zur Prüfung der Installation ausführen oder Antigravity neu starten.|Kopieren|Kopiert ✓',
     tr: 'Sohbet Başlıklarını Otomatik Çevir|İngilizce sohbet başlıklarını yalnızca görünüm katmanında çevirir (varsayılan kapalı); oturum verilerini değiştirmez, zaman damgası/yol/dosya adlarını atlar ve kapatıldığında aslına döndürür.|Tanıla|Tanılanıyor…|1. Arka Plan Köprüsü|Çevrimiçi|Çevrimdışı (servis bağlı değil)|2. Mod ve Profil|YZ İyileştirme|Makine|Kapalı|Profil hazır|Eksik yapılandırma|Geçersiz Base URL|Model ID eksik|API Anahtarı eksik|3. Proxy ve Bağlantı|Bağlı|Atlandı (çevirmen kapalı)|Kullanılamıyor (köprü çevrimdışı)|Erişilemiyor|Doğrudan / Proxy yok|Sistem Proxy|4. Sorun Giderme|Tüm kontroller geçti. Çeviriyi görmek için İngilizce bir düşünce bloğunu genişletin.|Arka plan servisini doğrulamak için aşağıdaki durum komutunu terminalde çalıştırın, ardından yamalı kısayoldan Antigravity’yi yeniden başlatın.|Üst akış kimlik doğrulaması başarısız. API anahtarını, kotanızı ve model izinlerini kontrol edin.|Üst akış veya proxy zaman aşımına uğradı / erişilemiyor. Oto / Özel / Doğrudan proxy modunu değiştirip yerel proxy portunu doğrulayın.|Geçerli bir Base URL, Model ID ve API Anahtarı girin (yerel Ollama anahtar gerektirmeyebilir) veya ücretsiz Makine Çevirisi’ne geçin.|Kurulum ve servis durumunu incelemek için aşağıdaki durum komutunu çalıştırın veya Antigravity’yi yeniden başlatın.|Kopyala|Kopyalandı ✓',
   };
+  if(globalThis.__agThSetRu&&globalThis.__agThSetRu.extra)EXTRA_ROWS.ru=globalThis.__agThSetRu.extra;
   for (const [lk, row] of Object.entries(EXTRA_ROWS)) {
     if (!WORKBENCH_I18N[lk]) continue;
     const vals = row.split('|');
@@ -118,6 +121,7 @@
     if (/^fr\b/.test(s) || s === 'french') return 'fr';
     if (/^de\b/.test(s) || s === 'german') return 'de';
     if (/^tr\b/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+    if (/^ru/.test(s) || s === 'русский') return 'ru';
     if (/^en\b/.test(s) || s === 'english') return 'en';
     return '';
   }

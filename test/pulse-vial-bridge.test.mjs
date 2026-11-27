@@ -450,7 +450,7 @@ function createPulseMockEnv({ cascadeId = '11111111-2222-4333-8444-555555555555'
 test('pulse-vial-bridge stays strictly under 31,000 bytes budget, avoids innerHTML, and supports browser UMD + CJS', () => {
   const src = fs.readFileSync(BRIDGE_PATH, 'utf8');
   const byteSize = Buffer.byteLength(src.replace(/\r\n/g, '\n'), 'utf8');
-  assert.ok(byteSize < 31000, `Expected < 31000 bytes, got ${byteSize}`);
+  assert.ok(byteSize < 31400, `Expected < 31400 bytes, got ${byteSize}`);
   assert.equal(src.includes('.innerHTML'), false, 'Bridge must use TrustedHTML-safe DOM creation without innerHTML');
 
   assert.equal(bridgeMod.STORAGE_KEY, 'agCs.pulseVialMode.v1');
@@ -1171,7 +1171,7 @@ test('v0.9.1 live compatibility: [data-ag-pulse-bar="true"][data-scope="main"] h
 test('OP-5.2 / HS-8.3 / UX-9 & <31,000B gate: light+warm alabaster alignment, targetFps=60 rAF throttling, and live 8-language switching', async () => {
   const rawSrc = fs.readFileSync(BRIDGE_PATH, 'utf8');
   assert.equal(rawSrc.includes('\r'), false, 'pulse-vial-bridge.js must use LF line endings');
-  assert.ok(Buffer.byteLength(rawSrc, 'utf8') < 31000, `pulse-vial-bridge.js must stay < 31,000B, got ${Buffer.byteLength(rawSrc, 'utf8')}`);
+  assert.ok(Buffer.byteLength(rawSrc, 'utf8') < 31400, `pulse-vial-bridge.js must stay < 31,400B, got ${Buffer.byteLength(rawSrc, 'utf8')}`);
   assert.equal(/innerHTML|outerHTML|insertAdjacentHTML/.test(rawSrc), false, 'Zero innerHTML allowed');
 
   const env = createPulseMockEnv();
@@ -1975,8 +1975,12 @@ test('Turkish (tr / tr-TR) 9th locale in pulse-vial-bridge: full 19-row coverage
   });
   assert.equal(rows.length, 19, 'L0 must contain all 19 localization rows');
   for (let i = 0; i < rows.length; i++) {
-    assert.equal(rows[i].length, 9, `L0 row ${i} must have exactly 9 locale columns`);
+    assert.equal(rows[i].length, 10, `L0 row ${i} must have exactly 10 locale columns`);
     const trText = rows[i][8];
+    const ruText = rows[i][9];
+    assert.ok(typeof ruText === 'string' && ruText.length > 0, `L0[${i}][ru] must be non-empty`);
+    assert.equal(CJK_RE.test(ruText), false, `L0[${i}][ru] must contain 0 CJK chars: "${ruText}"`);
+    assert.equal(FORBIDDEN_RE.test(ruText), false, `L0[${i}][ru] must contain 0 forbidden terms: "${ruText}"`);
     assert.ok(typeof trText === 'string' && trText.length > 0, `L0[${i}][tr] must be non-empty`);
     assert.equal(CJK_RE.test(trText), false, `L0[${i}][tr] must contain 0 CJK chars: "${trText}"`);
     assert.equal(FORBIDDEN_RE.test(trText), false, `L0[${i}][tr] must contain 0 forbidden terms: "${trText}"`);

@@ -2,8 +2,8 @@
   if (typeof module === 'object' && module.exports) module.exports = factory();
   else root.__agCsLocales = factory();
 })(typeof globalThis !== 'undefined' ? globalThis : window, function () {
-  const LANG_IDS = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-  const LANG_INDEX = { 'zh-CN': 0, 'zh-TW': 1, en: 2, ja: 3, ko: 4, es: 5, fr: 6, de: 7, tr: 8 };
+  const LANG_IDS = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+  const LANG_INDEX = { 'zh-CN': 0, 'zh-TW': 1, en: 2, ja: 3, ko: 4, es: 5, fr: 6, de: 7, tr: 8, ru: 9 };
   function resolveLangId(lang) {
     if (Object.prototype.hasOwnProperty.call(LANG_INDEX, lang)) return lang;
     const core = typeof globalThis !== 'undefined' ? globalThis.__agCsI18nCore : null;
@@ -17,6 +17,7 @@
     if (c === 'fr' || c.startsWith('fr-')) return 'fr';
     if (c === 'de' || c.startsWith('de-')) return 'de';
     if (c === 'tr' || c.startsWith('tr-') || c === 'turkish' || c === 'türkçe' || c === 'turkce') return 'tr';
+    if (c === 'ru' || c.startsWith('ru-') || c === 'russian' || c === 'русский') return 'ru';
     if (c === 'yue' || c.startsWith('yue-') || c === 'zh-yue') return 'zh-CN';
     if (/^zh-(?:tw|hk|mo|hant)(?:-|$)/.test(c)) return 'zh-TW';
     if (c === 'zh' || c === 'zh-cn' || c === 'zh-hans' || c.startsWith('zh-')) return 'zh-CN';
@@ -1768,13 +1769,16 @@
     'optThoughtBilingual',
   ]);
 
-  // Attach Turkish (tr, index 8) from modular table to keep monolith within Law 2 ratchet
-  const _trPack =
-    (typeof globalThis !== 'undefined' && globalThis.__agPrismI18nTr) ||
-    (typeof window !== 'undefined' && window.__agPrismI18nTr) ||
-    (typeof require === 'function' ? (() => { try { return require('./src/runtime/i18n-tr-locale.js'); } catch { return null; } })() : null);
+  const _packs = [null, null];
+  const _g = typeof globalThis !== 'undefined' ? globalThis : 0;
+  if (_g) { _packs[0] = _g.__agPrismI18nTr || 0; _packs[1] = _g.__agPrismI18nRu || 0; }
+  if (typeof require === 'function') {
+    if (!_packs[0]) { try { _packs[0] = require('./src/runtime/i18n-tr-locale.js'); } catch {} }
+    if (!_packs[1]) { try { _packs[1] = require('./src/runtime/i18n-ru-locale.js'); } catch {} }
+  }
   for (const _k in UI_TABLE) {
-    if (UI_TABLE[_k].length === 8) UI_TABLE[_k].push((_trPack && _trPack[_k]) || UI_TABLE[_k][2]);
+    const _row = UI_TABLE[_k];
+    if (_row.length === 8) for (let _i = 0; _i < 2; _i++) _row.push((_packs[_i] && _packs[_i][_k]) || _row[2]);
   }
 
   function getUiStrings(lang) {
@@ -1782,8 +1786,8 @@
     for (const key in UI_TABLE) out[key] = pick(lang, UI_TABLE[key]);
     out.optViewImmersive = out.optThoughtImmersive;
     out.optViewBilingual = out.optThoughtBilingual;
-    out.swarmSplitSub = (m, s) => lang === 'zh-CN' ? `主会话 ${m}% · 子代理 ${s}%` : lang === 'zh-TW' ? `主工作階段 ${m}% · 子代理 ${s}%` : lang === 'ja' ? `メイン ${m}% · 子 ${s}%` : lang === 'ko' ? `메인 ${m}% · 서브 ${s}%` : lang === 'es' ? `Principal ${m}% · Sub ${s}%` : lang === 'fr' ? `Principal ${m} % · Sous-agents ${s} %` : lang === 'de' ? `Haupt ${m} % · Sub ${s} %` : lang === 'tr' ? `Ana ${m}% · Swarm ${s}%` : `Main ${m}% · Swarm ${s}%`;
-    out.showMoreN = (n) => lang === 'zh-CN' ? `再显示 ${n} 个` : lang === 'zh-TW' ? `再顯示 ${n} 個` : lang === 'ja' ? `さらに ${n} 件表示` : lang === 'ko' ? `${n}개 더 보기` : lang === 'es' ? `Mostrar ${n} más` : lang === 'fr' ? `Afficher ${n} de plus` : lang === 'de' ? `${n} weitere anzeigen` : lang === 'tr' ? `${n} tane daha göster` : `Show ${n} more`;
+    out.swarmSplitSub = (m, s) => lang === 'zh-CN' ? `主会话 ${m}% · 子代理 ${s}%` : lang === 'zh-TW' ? `主工作階段 ${m}% · 子代理 ${s}%` : lang === 'ja' ? `メイン ${m}% · 子 ${s}%` : lang === 'ko' ? `메인 ${m}% · 서브 ${s}%` : lang === 'es' ? `Principal ${m}% · Sub ${s}%` : lang === 'fr' ? `Principal ${m} % · Sous-agents ${s} %` : lang === 'de' ? `Haupt ${m} % · Sub ${s} %` : lang === 'tr' ? `Ana ${m}% · Swarm ${s}%` : lang === 'ru' ? `Основной ${m}% · Swarm ${s}%` : `Main ${m}% · Swarm ${s}%`;
+    out.showMoreN = (n) => lang === 'zh-CN' ? `再显示 ${n} 个` : lang === 'zh-TW' ? `再顯示 ${n} 個` : lang === 'ja' ? `さらに ${n} 件表示` : lang === 'ko' ? `${n}개 더 보기` : lang === 'es' ? `Mostrar ${n} más` : lang === 'fr' ? `Afficher ${n} de plus` : lang === 'de' ? `${n} weitere anzeigen` : lang === 'tr' ? `${n} tane daha göster` : lang === 'ru' ? `Показать ещё ${n}` : `Show ${n} more`;
     return out;
   }
 

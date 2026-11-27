@@ -17,8 +17,8 @@ const settingsPanel = require(path.join(ROOT, 'settings-panel.js'));
 const i18nLocales = require(path.join(ROOT, 'i18n-locales.js'));
 const i18nCore = require(path.join(ROOT, 'i18n-core.js'));
 
-const SUPPORTED_8 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-const NON_CJK_4 = ['en', 'es', 'fr', 'de', 'tr'];
+const SUPPORTED_8 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+const NON_CJK_4 = ['en', 'es', 'fr', 'de', 'tr', 'ru'];
 const CJK_RE = /[\u4e00-\u9fff\u3400-\u4dbf]/;
 
 function makeTempDir(prefix) {
@@ -691,7 +691,7 @@ test('PrismDaemon: storage-detail, confirmed >14d prepare-archive, multi-batch r
 test('settings-panel (Ch9): lazy <details> drawer, 3-way mutually exclusive confirm gates (>14d + archive-restart + multi-batch restore), 8-locale 0 CJK leak, and 0 B into Ch1 / 0 BOM / 0 CRLF', async () => {
   // 1) Architecture & engineering gates: settings-panel.js stays in Ch9 (0 B into Ch1), pulse-vial-bridge < 31KB, 0 BOM / 0 CRLF
   assert.equal(cdp.RUNTIME_PARTS.includes('settings-panel.js'), false, 'settings-panel.js must remain outside Ch1 RUNTIME_PARTS');
-  assert.ok(fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size < 31000, 'pulse-vial-bridge.js must stay < 31,000 B');
+  assert.ok(fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size < 31400, 'pulse-vial-bridge.js must stay < 31,400 B');
   for (const rel of [
     'sidecars/daemon/conversation-archive.mjs',
     'sidecars/daemon/main.mjs',

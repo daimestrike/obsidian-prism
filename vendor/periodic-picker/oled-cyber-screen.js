@@ -329,6 +329,7 @@
       fr: { nonPlanner: 'NON-PLANNER · VERROUILLÉ ORCH', standbyAux: 'STANDBY · EMPLACEMENT RÉSERVÉ', synced: 'SYNCHRONISÉ' },
       de:{nonPlanner:'NON-PLANNER · IN ORCH GESPERRT',standbyAux:'STANDBY · RESERVIERTER SLOT',synced:'SYNCHRONISIERT'},
       tr:{nonPlanner:'NON-PLANNER · ORCH KİLİTLİ',standbyAux:'STANDBY · AYRILMIŞ YUVA',synced:'EŞİTLENDİ'},
+      ru:{nonPlanner:'НЕ ПЛАНИРОВЩИК · ЗАБЛОКИРОВАН В ORCH',standbyAux:'ОЖИДАНИЕ · РЕЗЕРВ МАКРОСЛОТА',synced:'СИНХРОНИЗИРОВАНО'},
     };
     function normalizeOledLang(raw) {
       var s = String(raw || '').trim().toLowerCase().replace(/_/g, '-');
@@ -342,6 +343,7 @@
       if (/^fr(?:$|-)/.test(s) || s === 'french') return 'fr';
       if (/^de(?:$|-)/.test(s) || s === 'german') return 'de';
       if (/^tr(?:$|-)/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+      if (/^ru(?:$|-)/.test(s) || s === 'russian' || s === 'русский') return 'ru';
       if (/^en(?:$|-)/.test(s) || s === 'english') return 'en';
       return '';
     }

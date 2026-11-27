@@ -754,7 +754,7 @@ test('settings-panel & 5-language i18n render autoUpdate(off default), update co
   assert.ok(bytes <= 704000, `Bundle must stay <= 704,000 B, got ${bytes} B`);
   const ghApiRe = new RegExp(['api', 'github', 'com'].join('\\.'), 'i');
   assert.equal(ghApiRe.test(expr), false, 'Renderer bundle must NEVER reference api.github.com');
-  assert.ok(fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size < 31000);
+  assert.ok(fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size < 31400);
 
   // Mock DOM mount test for Windows hot-reload flow and macOS manual link flow
   const prevDoc = globalThis.document;

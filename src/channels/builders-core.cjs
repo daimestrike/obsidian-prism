@@ -35,7 +35,9 @@ function createCoreChannelBuilders({ rootDir, pluginVersion, readConfig, bundleC
     if (!fs.existsSync(omniPath)) {
       return { minCode: '', codeHash: '' };
     }
-    const sig = getFileSig(omniPath);
+    const ruPath = path.join(rootDir, 'vendor', 'omni-viewer', 'omni-client-i18n-ru.js');
+    const hasRu = fs.existsSync(ruPath);
+    const sig = `${getFileSig(omniPath)}|${hasRu ? getFileSig(ruPath) : '0'}`;
     const cachePath = resolveBundleCachePathOption(opts);
     const curMem = bundleCache.getChannelMemCache('omni');
     if (!cachePath && curMem && curMem.sig === sig && curMem.codeHash) {
@@ -44,10 +46,14 @@ function createCoreChannelBuilders({ rootDir, pluginVersion, readConfig, bundleC
     return bundleCache.resolveChannelAssetsWithDiskCache({
       channelName: 'omni',
       sig,
-      fileEntries: [{ rel: 'vendor/omni-viewer/omni-client.js', fullPath: omniPath }],
+      fileEntries: [
+        ...(hasRu ? [{ rel: 'vendor/omni-viewer/omni-client-i18n-ru.js', fullPath: ruPath }] : []),
+        { rel: 'vendor/omni-viewer/omni-client.js', fullPath: omniPath },
+      ],
       opts,
       compileFn: () => {
-        const minCode = minifySingleSource(fs.readFileSync(omniPath, 'utf8'), { allowMemberProps: false });
+        const ruSrc = hasRu ? fs.readFileSync(ruPath, 'utf8').trim() : '';
+        const minCode = `${ruSrc ? `${ruSrc};\n` : ''}${minifySingleSource(fs.readFileSync(omniPath, 'utf8'), { allowMemberProps: false })}`;
         const codeHash = computeHash(minCode);
         return { minCode, codeHash };
       },
@@ -387,7 +393,9 @@ ${CHANNEL_OMNI_SIDEBAR_HOST_GUARD}
     if (!fs.existsSync(clientPath)) {
       return { sig: '', minCode: '', codeHash: '' };
     }
-    const sig = getFileSig(clientPath);
+    const ruPath = path.join(rootDir, 'vendor', 'inline-diff', 'inline-diff-i18n-ru.js');
+    const hasRu = fs.existsSync(ruPath);
+    const sig = `${getFileSig(clientPath)}|${hasRu ? getFileSig(ruPath) : '0'}`;
     const cachePath = resolveBundleCachePathOption(opts);
     const curMem = bundleCache.getChannelMemCache('inlineDiff');
     if (!cachePath && curMem && curMem.sig === sig && curMem.codeHash) {
@@ -396,10 +404,14 @@ ${CHANNEL_OMNI_SIDEBAR_HOST_GUARD}
     return bundleCache.resolveChannelAssetsWithDiskCache({
       channelName: 'inlineDiff',
       sig,
-      fileEntries: [{ rel: 'vendor/inline-diff/inline-diff-client.js', fullPath: clientPath }],
+      fileEntries: [
+        ...(hasRu ? [{ rel: 'vendor/inline-diff/inline-diff-i18n-ru.js', fullPath: ruPath }] : []),
+        { rel: 'vendor/inline-diff/inline-diff-client.js', fullPath: clientPath },
+      ],
       opts,
       compileFn: () => {
-        const minCode = minifySingleSource(fs.readFileSync(clientPath, 'utf8'), { allowMemberProps: false });
+        const ruSrc = hasRu ? fs.readFileSync(ruPath, 'utf8').trim() : '';
+        const minCode = `${ruSrc ? `${ruSrc};\n` : ''}${minifySingleSource(fs.readFileSync(clientPath, 'utf8'), { allowMemberProps: false })}`;
         const codeHash = computeHash(minCode);
         return { minCode, codeHash };
       },

@@ -624,10 +624,13 @@ test('W5-4 (Issue #110 i18n): periodic-picker 8-locale tierNonPlanner & unrelNon
   const endIdx = pickerSrc.indexOf('function getPpI18nPack', startIdx);
   assert.ok(endIdx > startIdx);
   const block = pickerSrc.slice(startIdx, endIdx);
+  const prevPpRu = globalThis.__agPpRu;
+  globalThis.__agPpRu = require(path.join(ROOT, 'vendor', 'periodic-picker', 'picker-i18n-ru.js'));
   const PP_I18N = new Function(`${block}; return PP_I18N;`)();
+  if (prevPpRu === undefined) delete globalThis.__agPpRu; else globalThis.__agPpRu = prevPpRu;
 
-  const CANONICAL_9 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-  const NON_CJK = new Set(['en', 'ko', 'es', 'fr', 'de', 'tr']);
+  const CANONICAL_9 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+  const NON_CJK = new Set(['en', 'ko', 'es', 'fr', 'de', 'tr', 'ru']);
   const CJK_RE = /[\u3400-\u9FFF\uF900-\uFAFF]/;
 
   for (const loc of CANONICAL_9) {
@@ -660,8 +663,8 @@ test('W6-Footer-UX: decoupled footerTier/barTier 6-tier layout, compact vs both 
   assert.equal(cdp.validateConfigEntry('telemetryQuotaMode', 'both'), true);
   assert.equal(cdp.validateConfigEntry('telemetryQuotaMode', 'invalid'), false);
 
-  const CANONICAL_9 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-  const NON_CJK = new Set(['en', 'ko', 'es', 'fr', 'de', 'tr']);
+  const CANONICAL_9 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+  const NON_CJK = new Set(['en', 'ko', 'es', 'fr', 'de', 'tr', 'ru']);
   const CJK_RE = /[\u3400-\u9FFF\uF900-\uFAFF]/;
   for (const loc of CANONICAL_9) {
     const d = i18nExt.getStrings(loc);
