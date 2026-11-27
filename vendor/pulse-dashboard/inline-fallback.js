@@ -34,8 +34,9 @@ es:'Caché|Rendimiento|TTFT|Velocidad rec.|Ventana de ctx|Modelo activo|usado|li
 fr:'Cache|Débit|TTFT|Dernier débit|Fenêtre ctx|Modèle actif|utilisé|libre| sous|5h|Heb|Quota 5h|Quota hebdo',
 de:'Cache|Durchsatz|TTFT|Akt. Rate|Kontextfenster|Aktives Modell|belegt|frei| Sub|5h|W|5h-Kontingent|Wochenkontingent',
 tr:'Önbellek|Verim|TTFT|Son Hız|Bağlam|Aktif Model|dolu|boş| alt|5h|Hf|5s Kota|Haftalık Kota',
+ru:'Кэш|Пропускная|Первый токен|Последняя скорость|Окно контекста|Активная модель|занято|свободно| субаг.|5 ч|Нед.|Квота 5 ч|Недельная квота',
 };
-const LANG_M=[[/^(?:yue(?:-|$)|zh-yue|.*cantonese)/,'zh-CN'],[/^(?:zh-(?:tw|hant|hk|mo)|tw$|hant$)/,'zh-TW'],[/^zh/,'zh-CN'],[/^(?:ja|jp|japanese$)/,'ja'],[/^(?:ko|kr|korean$)/,'ko'],[/^(?:es|spanish$)/,'es'],[/^(?:fr|french$)/,'fr'],[/^(?:de|german$)/,'de'],[/^(?:tr|turkish$|türkçe$|turkce$)/,'tr']];
+const LANG_M=[[/^(?:yue(?:-|$)|zh-yue|.*cantonese)/,'zh-CN'],[/^(?:zh-(?:tw|hant|hk|mo)|tw$|hant$)/,'zh-TW'],[/^zh/,'zh-CN'],[/^(?:ja|jp|japanese$)/,'ja'],[/^(?:ko|kr|korean$)/,'ko'],[/^(?:es|spanish$)/,'es'],[/^(?:fr|french$)/,'fr'],[/^(?:de|german$)/,'de'],[/^(?:tr|turkish$|türkçe$|turkce$)/,'tr'],[/^(?:ru|russian$|русский$)/,'ru']];
 function normFbLang(raw,win){
 let v=String(raw||'').trim();
 if(!v||v.toLowerCase()==='auto'){const nv=win&&'navigator'in win?win.navigator:(typeof navigator!=='undefined'?navigator:null);v=String(nv?.languages?.[0]||nv?.language||'').trim();}

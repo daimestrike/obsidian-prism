@@ -42,6 +42,7 @@
     fr: 'Replier|Déplier|L|Plan| tours|Replier étapes|Replié ||Tout est clair|Filtrer les requêtes...|Aucun résultat|Chapitre|Requêtes',
     de: 'Einklappen|Ausklappen|Z|Gliederung| Runden|Schritte einklappen|Eingeklappt ||Bereinigt|Prompts filtern...|Keine Treffer|Kapitel|Prompts',
     tr: 'Katla|Genişlet| satır|Anahat| tur|Adımları katla|Katlanan | adım|Katlanacak yok|İstemleri filtrele...|Eşleşen istem yok|Bölüm|İstemler',
+    ru: 'Свернуть|Развернуть| стр.|Оглавление| ходов|Свернуть шаги|Свернуто ||Нечего сворачивать|Фильтр промптов…|Нет подходящих промптов|Глава|Промпты',
   };
   const UI_STRINGS = {};
   for (const k in UI_RAW) {
@@ -76,6 +77,7 @@
     if (/^fr/.test(l) || l === 'french') return 'fr';
     if (/^de/.test(l) || l === 'german') return 'de';
     if (/^tr/.test(l) || l === 'turkish' || l === 'türkçe' || l === 'turkce') return 'tr';
+    if (/^ru/.test(l) || l === 'русский') return 'ru';
     return 'en';
   }
 
@@ -360,8 +362,8 @@
     }
 
     const SIDEBAR_MORE_FB = {
-      sidebarMoreLabel: { 'zh-CN': '更多', 'zh-TW': '更多', en: 'More', ja: 'その他', ko: '더보기', es: 'Más', fr: 'Plus', de: 'Mehr', tr: 'Daha fazla' },
-      sidebarLessLabel: { 'zh-CN': '收起', 'zh-TW': '收起', en: 'Less', ja: '折りたたむ', ko: '접기', es: 'Menos', fr: 'Moins', de: 'Weniger', tr: 'Daha az' },
+      sidebarMoreLabel: { 'zh-CN': '更多', 'zh-TW': '更多', en: 'More', ja: 'その他', ko: '더보기', es: 'Más', fr: 'Plus', de: 'Mehr', tr: 'Daha fazla', ru: 'Ещё' },
+      sidebarLessLabel: { 'zh-CN': '收起', 'zh-TW': '收起', en: 'Less', ja: '折りたたむ', ko: '접기', es: 'Menos', fr: 'Moins', de: 'Weniger', tr: 'Daha az', ru: 'Меньше' },
     };
     function getUiText(key, fallback) {
       if (tFn) {

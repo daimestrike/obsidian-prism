@@ -751,7 +751,7 @@ test('w6-6: 0 innerHTML writes, 0 UTF-8 BOM, 0 CRLF, and all Channel 1 + modifie
     }
   }
 
-  for (const lang of ['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr']) {
+  for (const lang of ['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru']) {
     const expr = cdp.buildInjectExpression({ ...cdp.DEFAULT_CONFIG, language: lang }, { bundleCachePath: '' });
     const bytes = Buffer.byteLength(expr, 'utf8');
     assert.ok(bytes < 390000, `Channel 1 [${lang}] must be < 390,000 B, got ${bytes}`);

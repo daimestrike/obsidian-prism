@@ -24,21 +24,23 @@ function createI18nChannelBuilders({ rootDir, readConfig, detectSystemUiLocale, 
       raw === 'auto'
         ? String(hostLocaleHint || detectSystemUiLocale() || '').trim().split(/[.@]/)[0].toLowerCase().replace(/_/g, '-')
         : raw;
-    return effective === 'tr' || effective.startsWith('tr-') || effective === 'turkish' || effective === 'türkçe' || effective === 'turkce'
-      ? 'tr'
-      : 'zh-CN';
+    if (effective === 'tr' || effective.startsWith('tr-') || effective === 'turkish' || effective === 'türkçe' || effective === 'turkce') return 'tr';
+    if (effective === 'ru' || effective.startsWith('ru-') || effective === 'russian' || effective === 'русский') return 'ru';
+    return 'zh-CN';
   }
 
   function getHostI18nDictionaryPath(config, hostLocaleHint = null) {
     const cfg = config && typeof config === 'object' ? reconcileConfigAliases(config) : readConfig();
     const effective = resolveHostI18nLocale(cfg.language || cfg.lang || 'auto', hostLocaleHint);
-    return path.join(rootDir, 'vendor', 'host-i18n', effective === 'tr' ? 'tr.json' : 'zh-CN.json');
+    const dict = effective === 'tr' || effective === 'ru' ? `${effective}.json` : 'zh-CN.json';
+    return path.join(rootDir, 'vendor', 'host-i18n', dict);
   }
 
   function getSwarmI18nDictionaryPath(config, hostLocaleHint = null) {
     const cfg = config && typeof config === 'object' ? reconcileConfigAliases(config) : readConfig();
     const effective = resolveHostI18nLocale(cfg.language || cfg.lang || 'auto', hostLocaleHint);
-    return path.join(rootDir, 'vendor', 'host-i18n', effective === 'tr' ? 'swarm-tr.json' : 'swarm-zh-CN.json');
+    const dict = effective === 'tr' ? 'swarm-tr.json' : effective === 'ru' ? 'swarm-ru.json' : 'swarm-zh-CN.json';
+    return path.join(rootDir, 'vendor', 'host-i18n', dict);
   }
 
   function shouldEnableHostI18n(config, hostLocaleHint = null) {
@@ -46,9 +48,9 @@ function createI18nChannelBuilders({ rootDir, readConfig, detectSystemUiLocale, 
     const mode = cfg.hostLocalization || 'auto';
     const lang = cfg.language || cfg.lang || 'auto';
     const effective = resolveHostI18nLocale(lang, hostLocaleHint);
-    if (effective === 'tr') {
+    if (effective === 'tr' || effective === 'ru') {
       if (mode === 'off') return false;
-      return fs.existsSync(path.join(rootDir, 'vendor', 'host-i18n', 'tr.json'));
+      return fs.existsSync(path.join(rootDir, 'vendor', 'host-i18n', `${effective}.json`));
     }
     // off 模式挂载第四通道进入反向英文还原（温和压制外部运行时 DOM 汉化，零 app.asar 修改）
     if (mode === 'off') return true;
@@ -97,7 +99,7 @@ function createI18nChannelBuilders({ rootDir, readConfig, detectSystemUiLocale, 
         const parsedDict = JSON.parse(fs.readFileSync(dictPath, 'utf8'));
         const plainJson = JSON.stringify(parsedDict).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
         const dictRaw =
-          effectiveLang === 'tr' || Buffer.byteLength(plainJson, 'utf8') > DICT_COMPRESS_THRESHOLD_BYTES
+          effectiveLang === 'tr' || effectiveLang === 'ru' || Buffer.byteLength(plainJson, 'utf8') > DICT_COMPRESS_THRESHOLD_BYTES
             ? `JSON.parse(${packTextJsExpr(plainJson, 5600)})`
             : plainJson;
         const codeHash = computeHash(`${minRuntime}:${dictRaw}`);
@@ -142,7 +144,7 @@ function createI18nChannelBuilders({ rootDir, readConfig, detectSystemUiLocale, 
     }
     const mode = cfg.hostLocalization === 'on' ? 'on' : cfg.hostLocalization === 'off' ? 'off' : 'auto';
     const modeJson = serializeJsonForEval(mode);
-    const localeOption = effectiveHostLang === 'tr' ? 'locale: "tr",' : '';
+    const localeOption = effectiveHostLang === 'tr' || effectiveHostLang === 'ru' ? `locale: "${effectiveHostLang}",` : '';
     const effectiveLangJson = serializeJsonForEval(effectiveHostLang);
     const hashJson = serializeJsonForEval(codeHash);
 
@@ -161,8 +163,8 @@ ${CHANNEL_MAIN_FRAME_HOST_GUARD}
         } else {
           targetMode = 'auto';
           const liveLang = liveCfg.language || liveCfg.lang || '';
-          if (${effectiveLangJson} === 'tr') {
-            if (liveLang && liveLang !== 'tr' && liveLang !== 'auto') {
+          if (${effectiveLangJson} === 'tr' || ${effectiveLangJson} === 'ru') {
+            if (liveLang && liveLang !== ${effectiveLangJson} && liveLang !== 'auto') {
               try { window.__agPrismHostI18n?.destroy?.(); document.documentElement?.removeAttribute?.('data-ag-prism-host-i18n'); } catch {}
               return { ok: true, status: 'off', skippedByLiveCfg: true };
             }

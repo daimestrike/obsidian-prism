@@ -12,7 +12,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : window, function () {
   'use strict';
 
-  const LOCALES = Object.freeze(['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr']);
+  const LOCALES = Object.freeze(['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru']);
   const LOCALE_INDEX = Object.freeze(Object.fromEntries(LOCALES.map((l, i) => [l, i])));
 
   // 列序严格对齐 LOCALES：[zh-CN, zh-TW, en, ja, ko, es, fr, de, tr]
@@ -327,6 +327,11 @@
     ],
   });
 
+  try {
+    const _ruExt = (typeof globalThis !== 'undefined' && globalThis.__agPrismI18nRuSurfaces?.ext) || (typeof require === 'function' ? require('./i18n-ru-surfaces.js').ext : null);
+    if (_ruExt) for (const _k in TABLE) if (TABLE[_k].length === 9) TABLE[_k].push(_ruExt[_k] || TABLE[_k][2]);
+  } catch {}
+
   function normalizeLocale(lang) {
     const raw = typeof lang === 'string' ? lang.trim().toLowerCase().replace(/_/g, '-') : '';
     if (!raw || raw === 'auto') return 'en';
@@ -338,6 +343,7 @@
     if (raw === 'fr' || raw.startsWith('fr-')) return 'fr';
     if (raw === 'de' || raw.startsWith('de-')) return 'de';
     if (raw === 'tr' || raw.startsWith('tr-') || raw === 'turkish' || raw === 'türkçe' || raw === 'turkce') return 'tr';
+    if (raw === 'ru' || raw.startsWith('ru-') || raw === 'russian' || raw === 'русский') return 'ru';
     return 'en';
   }
 

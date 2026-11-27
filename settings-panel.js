@@ -153,7 +153,7 @@
     homeRipple: S_T,
     convRipple: mkSp(['off', 'subtle', 'medium', 'full'], 'off', { on: 'medium', true: 'medium', false: 'off' }),
     logoInk: mkSp(['accent', 'foreground']),
-    language: mkSp(['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'], 'auto', { yue: 'zh-CN', 'zh-HK': 'zh-TW', 'zh-MO': 'zh-TW' }),
+    language: mkSp(['auto', 'zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'], 'auto', { yue: 'zh-CN', 'zh-HK': 'zh-TW', 'zh-MO': 'zh-TW' }),
     hostLocalization: S_AUTO,
     composerRestyle: S_T,
     placeholderStyle: mkSp(['studio', 'host']),
@@ -2468,6 +2468,7 @@
               { id: 'fr', label: 'Français' },
               { id: 'de', label: 'Deutsch' },
               { id: 'tr', label: 'Türkçe' },
+              { id: 'ru', label: 'Русский' },
             ]
           ).map((o) => [o.id, o.label]);
 

@@ -598,7 +598,7 @@ test('inject expression mounts cleanly without model-button or telemetry conflic
     };
 
     // Verify all 9 language buttons switch dashboard, greeting, placeholder & settings copy + emit CDP binding (no yue)
-    assert.equal(getLangBtns().length, 9, 'Expected exactly 9 language buttons');
+    assert.equal(getLangBtns().length, 10, 'Expected exactly 10 language buttons');
     assert.equal(getLangBtns().some((b) => b.getAttribute('data-ag-cs-val') === '"yue"'), false, 'yue button must be removed');
     checkLangSwitch('zh-TW', '外觀', '介面語言', '概覽', '接下來做什麼？', '描述任務或提出問題');
     checkLangSwitch('ko', 'Appearance', 'UI 언어', '개요', '다음은 무엇을 할까요?', '작업 설명이나 질문을 입력하세요');
@@ -4046,6 +4046,8 @@ test('Channel 1 budget (< 684,500 B), periodicModelPicker default on, style.css 
   assert.equal(cdp.shouldEnablePeriodicPicker({ periodicModelPicker: 'off' }), false);
   assert.equal(cdp.buildPeriodicPickerExpression({ ...cdp.DEFAULT_CONFIG, periodicModelPicker: 'off' }), '');
   assert.deepEqual(cdp.PERIODIC_PICKER_MODULE_FILES, [
+    'picker-i18n-ru.js',
+    'bento-i18n-ru.js',
     'pbr-grain-assets.js',
     'audio-fx.js',
     'model-catalog.js',

@@ -1,5 +1,6 @@
 // Obsidian Prism 双极工作台共享纯状态机（零 DOM/IO 纯函数）
 import { TR_GREETING_POOL, TR_HERO_GREETING_POOL } from './greetings-tr.mjs';
+import { RU_GREETING_POOL, RU_HERO_GREETING_POOL } from './greetings-ru.mjs';
 
 export const SCHEMA_VERSION = 2;
 
@@ -196,7 +197,7 @@ export const GREETING_POOLS = Object.freeze({
       'Bereit, wann immer du willst.',
     ]),
   }),
-  tr: TR_GREETING_POOL,
+  tr: TR_GREETING_POOL, ru: RU_GREETING_POOL,
 });
 
 export function normalizeGreetingLang(rawLang) {
@@ -209,6 +210,7 @@ export function normalizeGreetingLang(rawLang) {
   if (s.startsWith('fr')) return 'fr';
   if (s.startsWith('de')) return 'de';
   if (s.startsWith('tr') || s === 'turkish' || s === 'türkçe') return 'tr';
+  if (s.startsWith('ru') || s === 'русский') return 'ru';
   if (s.startsWith('en')) return 'en';
   return 'zh-CN';
 }
@@ -363,7 +365,7 @@ export const HERO_GREETING_POOLS = Object.freeze({
       'Was möchtest du erkunden?',
     ]),
   }),
-  tr: TR_HERO_GREETING_POOL,
+  tr: TR_HERO_GREETING_POOL, ru: RU_HERO_GREETING_POOL,
 });
 
 export function formatHeroGreeting(lang = 'zh-CN', userName = '', seedIndex = 0) {

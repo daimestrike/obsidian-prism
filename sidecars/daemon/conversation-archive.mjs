@@ -1925,7 +1925,7 @@ const STORAGE_WB_I18N = {
   tr: { summary: 'Depolama ayrıntıları ve kayıpsız arşiv çalışma alanı', archiveOldMain: '14 günden eski ana sohbetleri dahil et', restoreBtn: 'Çevrimdışı geri yükleme betiği', refreshBtn: 'Yenile', restoreReadyTpl: 'Geri yükleme betiği hazır ({0}): {1} (önce Antigravity’yi kapatın)', oldMainReadyTpl: 'Arşiv betiği hazır ({0} öğe / {1}): {2} (önce Antigravity’yi kapatın)', breakdown: 'Dağılım', main: 'Ana sohbetler', subagent: 'Alt ajanlar', wal: 'WAL', unknown: 'Dizine eklenmemiş', lsMem: 'Arka plan belleği', archivable: 'Arşivlenebilir', archSub: 'Tamamlanan alt ajanlar', archOld: '14 günden eski ana sohbetler (son 20 sohbet korunur)', topTitle: 'En büyük 5 sohbet (salt okunur)', batchTitle: 'Kayıpsız arşiv grupları', none: 'Yok', hint: 'Kayıpsız ilke: yalnızca manifest.json ile taşıma ve toplu geri yükleme; betikleri çalıştırmadan önce Antigravity’yi kapatın.', },
 };
 
-export const WORKBENCH_SUPPORTED_LANGS = Object.freeze(['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr']);
+export const WORKBENCH_SUPPORTED_LANGS = Object.freeze(['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru']);
 
 export function normalizeWorkbenchLang(lang = 'en') {
   const s = String(lang || '').trim().toLowerCase().replace(/_/g, '-');

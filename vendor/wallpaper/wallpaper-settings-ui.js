@@ -26,6 +26,8 @@
     tr:
       'Özel Statik / Canlı Duvar Kağıdı (Beta)|Deneysel Beta özelliği (varsayılan kapalı, sürümler arasında değişebilir): %100 yerel görsel ve MP4/WebM, sıfır dış ağ isteği, odak kaybında veya sohbette otomatik 0fps uyku.|Duvar Kağıdını Etkinleştir (Beta)|Açık|Kapalı|Görsel / Video Seç|Uygula|Temizle|Yerel görsel veya MP4/WebM video için tam yol girin…|Opaklık|Gauss Bulanıklığı|Göz Koruma Karartması|Sığdırma Modu|Kapla|Sığdır|Odak Kaybında Videoyu Duraklat|Pencere odağı kaybettiğinde veya küçültüldüğünde video duvar kağıdını otomatik duraklatır.|Duvar kağıdı kapalı (Beta · 0 kaynak kullanımı).|Prism arka plan servisi çevrimdışı; duvar kağıdı servisi kullanılamıyor.|Statik görsel duvar kağıdı etkin (Beta · yerel salt okunur akış).|Canlı video duvar kağıdı etkin (Beta · odak kaybında/gizlendiğinde otomatik 0fps uyku).|Ana makine güvenlik ilkesiyle kısıtlandı; otomatik olarak <= 8 MB güvenli görsel yedeğine geçildi.|Video akışı güvenlik ilkesiyle kısıtlandı veya çözülemedi. Bunun yerine <= 8 MB statik bir görsel deneyin.|Linux’ta yerel medya dosyasının tam yolunu yukarı yapıştırıp Uygula’ya tıklayın.|Dosya seçimi iptal edildi.|Sistem dosya seçicisi açılıyor…|Duvar kağıdı ayarları doğrulanıyor ve kaydediliyor…|Duvar kağıdı temizlendi ve yerel port serbest bırakıldı.|Desteklenmeyen biçim: yalnızca JPG/PNG/WebP/GIF/AVIF/MP4/WebM izin verilir (SVG/HTML/betik yok).|Güvenlik nedeniyle engellendi: sistem ve kimlik bilgisi dizinleri (.ssh/.aws/.gemini/Windows) yasaktır.|Güvenlik nedeniyle engellendi: sembolik bağlantılar duvar kağıdı olarak kullanılamaz.|Güvenlik nedeniyle engellendi: UNC ağ yolları ve NT aygıt yolları yasaktır.|Dosya bulunamadı veya okunamıyor. Yolu kontrol edip tekrar deneyin.|Dosya başlığı doğrulaması başarısız: dosya içeriği uzantısıyla eşleşmiyor.|Dosya boyutu izin verilen üst sınırı aşıyor.|Görsel 8 MB güvenli yedek sınırını aşıyor. Görseli sıkıştırın veya yerel akışa izin verin.|İşlem başarısız. Dosya yolunu ve izinleri kontrol edin.',
   };
+try{globalThis.__agWpRu||require('./wallpaper-i18n-ru.js')}catch{}
+  if(globalThis.__agWpRu)I18N_ROWS.ru=globalThis.__agWpRu;
 
   const WALLPAPER_I18N = Object.fromEntries(
     Object.entries(I18N_ROWS).map(([lang, row]) => {
@@ -48,6 +50,7 @@
     if (/^fr\b/.test(s) || s === 'french') return 'fr';
     if (/^de\b/.test(s) || s === 'german') return 'de';
     if (/^tr\b/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+    if (/^ru/.test(s)) return 'ru';
     if (/^en\b/.test(s) || s === 'english') return 'en';
     return '';
   }

@@ -751,7 +751,7 @@
   }
 
   function detectExternalLocalization(rootObj, doc, options) {
-    if (options && options.locale === 'tr') return { detected: false, layer: 0, reason: null, provider: null, detail: null };
+    if (options && options.locale && options.locale !== 'zh-CN') return { detected: false, layer: 0, reason: null, provider: null, detail: null };
     var l1 = detectLayer1External(rootObj, doc);
     if (l1.hit) return { detected: true, layer: 1, reason: 'external-ui-zh', provider: l1.provider || 'generic-external', detail: l1.detail };
     var l2 = detectLayer2ChromeZh(doc, options);
@@ -1866,7 +1866,7 @@
       }
     } catch (e) {}
     var mode = opts.mode === 'on' || opts.mode === 'off' ? opts.mode : 'auto';
-    var locale = opts.locale === 'tr' ? 'tr' : 'zh-CN';
+    var locale = opts.locale && opts.locale !== 'zh-CN' ? opts.locale : 'zh-CN';
     var initialHtmlLang = doc && doc.documentElement ? getAttr(doc.documentElement, 'lang') : null;
     var nowFn = typeof opts.nowFn === 'function' ? opts.nowFn : function () { return Date.now(); };
     var perfNowFn =
@@ -2603,7 +2603,7 @@
         origText !== undefined
           ? currentText === origText
           : hasOwn.call(st.entries, currentText) || currentText === st.lastOrig;
-      var isExternalZh = locale !== 'tr' && ZH_CHAR_RE.test(currentText || '') && currentText !== expectedText;
+      var isExternalZh = locale === 'zh-CN' && ZH_CHAR_RE.test(currentText || '') && currentText !== expectedText;
       if (isBackToOrig || isExternalZh) {
         var refAt = translatedAt || st.lastTranslatedAt;
         var inWindow =
@@ -2714,7 +2714,7 @@
 
       // Host updated to genuinely new English copy (e.g. "Save" -> "Saved")
       var isBackToOrig = currentVal === snap.orig;
-      var isExternalZh = locale !== 'tr' && ZH_CHAR_RE.test(currentVal || '');
+      var isExternalZh = locale === 'zh-CN' && ZH_CHAR_RE.test(currentVal || '');
       if (!isBackToOrig && !isExternalZh) {
         textSnapshots.delete(node);
         modifiedTextNodes.delete(node);
@@ -2733,7 +2733,7 @@
 
       var isBackToOrig = hasOwn.call(st.entries, curText) || curText === st.lastOrig;
       var isExternalZh =
-        locale !== 'tr' &&
+        locale === 'zh-CN' &&
         ZH_CHAR_RE.test(curText) &&
         curText !== st.lastExpected &&
         (!st.lastExpected || curText.indexOf(st.lastExpected) === -1) &&
@@ -3888,7 +3888,7 @@ win.addEventListener('focus', focusHandler);
 function boot(targetMode) {
 mode = targetMode === 'on' || targetMode === 'off' ? targetMode : 'auto';
 state.mode = mode;
-if (locale === 'tr' && doc && doc.documentElement) { try { doc.documentElement.setAttribute('lang', 'tr'); } catch (e) {} }
+if (locale !== 'zh-CN' && doc && doc.documentElement) { try { doc.documentElement.setAttribute('lang', locale); } catch (e) {} }
 selectEngineForMode(mode);
 state.destroyed = false;
 state.yielded = false;
@@ -3971,7 +3971,7 @@ return;
       },
       destroy: function () {
         teardownRuntime('off', 'destroyed', false, null, true);
-        if (locale === 'tr' && doc && doc.documentElement && getAttr(doc.documentElement, 'lang') === 'tr') {
+        if (locale !== 'zh-CN' && doc && doc.documentElement && getAttr(doc.documentElement, 'lang') === locale) {
           try { if (initialHtmlLang === null) doc.documentElement.removeAttribute('lang'); else doc.documentElement.setAttribute('lang', initialHtmlLang); } catch (e) {}
         }
       },

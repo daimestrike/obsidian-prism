@@ -1,5 +1,6 @@
 // Obsidian Prism — Omni Streaming Workbench Frontend (workbench-page.mjs)
 import { WORKBENCH_I18N_TR } from './workbench-i18n-tr.mjs';
+import { WORKBENCH_I18N_RU } from './workbench-i18n-ru.mjs';
 
 const EXT_KIND_MAP = Object.freeze({
   mp4: 'video', webm: 'video', mov: 'video', m4v: 'video', mkv: 'video', ogv: 'video', avi: 'video',
@@ -228,7 +229,7 @@ export const WORKBENCH_I18N = {
   waitingMermaid: ['等待传入图表数据…', '等待傳入圖表資料…', 'Waiting for diagram payload…', '図表データを待機中…', '다이어그램 데이터 대기 중…', 'Esperando datos del diagrama…', 'En attente du diagramme…', 'Warte auf Diagrammdaten…'],
   sandboxIsolated: ['沙盒隔离', '沙盒隔離', 'Sandbox Isolated', 'サンドボックス隔離', '샌드박스 격리', 'Aislado en sandbox', 'Isolé en sandbox', 'Sandbox-isoliert'],
 };
-for (const [k, v] of Object.entries(WORKBENCH_I18N_TR)) { if (WORKBENCH_I18N[k]) WORKBENCH_I18N[k].push(v); }
+for (const pack of [WORKBENCH_I18N_TR, WORKBENCH_I18N_RU]) for (const [k, v] of Object.entries(pack)) { if (WORKBENCH_I18N[k]) WORKBENCH_I18N[k].push(v); }
 
 function escapeHtml(str) {
   return String(str ?? '')
@@ -2786,7 +2787,7 @@ export function renderWorkbenchHtml(ctx = {}) {
       ? 'zh-TW'
       : rawLangLow === 'tr' || rawLangLow.startsWith('tr-') || rawLangLow === 'turkish' || rawLangLow === 'türkçe'
       ? 'tr'
-      : ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'].includes(rawLang)
+      : ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'].includes(rawLang)
       ? rawLang
       : 'zh-CN';
   const fileName = String(ctx.name ?? ctx.fileName ?? (extractFileName(filePath) || (resolvedKind === 'mermaid' ? 'Mermaid Diagram' : 'Workbench')));

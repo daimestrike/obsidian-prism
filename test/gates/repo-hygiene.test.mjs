@@ -120,6 +120,7 @@ const ADR_FILES = [
   'docs/adr/ADR-004-ch1-budget-and-single-channel-registry.md',
   'docs/adr/ADR-005-explicit-fsm-and-composition.md',
   'docs/adr/ADR-006-zero-innerhtml-and-cssom-hygiene.md',
+  'docs/adr/ADR-007-tenth-locale-russian.md',
 ];
 
 test('Phase 1 directory hygiene: community docs live in .github/, multilingual docs in docs/, Windows bat scripts in scripts/win/, and root stays within allowlist', () => {

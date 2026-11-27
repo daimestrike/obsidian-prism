@@ -91,7 +91,7 @@ Off by default — enable it under **Settings → Appearance → Beta**. A switc
 
 ### 5. More Capabilities
 
-- **Appearance Control Center**: Lives in **Settings → Appearance** — redesigned two-column modal, **9 UI languages** (zh-CN/zh-TW/en/ja/ko/es/fr/de/tr), **39** end-to-end validated panel settings (**54** schema config keys overall, including `sidebarNavFold`, `scrollBottomMotion`, and Stable / Beta update channels), three scene presets (Full Visuals / Deep Focus / Silent Eco), backup/restore and one-click updates.
+- **Appearance Control Center**: Lives in **Settings → Appearance** — redesigned two-column modal, **10 UI languages** (zh-CN/zh-TW/en/ja/ko/es/fr/de/tr/ru), **39** end-to-end validated panel settings (**54** schema config keys overall, including `sidebarNavFold`, `scrollBottomMotion`, and Stable / Beta update channels), three scene presets (Full Visuals / Deep Focus / Silent Eco), backup/restore and one-click updates.
 - **Thought & Title Translator**: On-demand module that injects `0 B` by default when disabled with hot-plug support; zero-config machine translation or streaming local/compatible endpoints, OS proxy auto-detection + manual HTTP/SOCKS5 proxy, optional tool-summary & conversation-title translation, 1-Click Diagnose bar, and clickable source paths/line numbers.
 - **Custom Static / Live Video Wallpaper (Beta)**: Experimental on-demand module, off by default (zero overhead); 100% local read-only streaming for images (JPG/PNG/WebP/GIF/AVIF) and videos (MP4/WebM) with opacity/blur/dim controls, Browser Hole avoidance, and automatic `0fps` pause on blur/hide.
 - **Omni Browser, File Viewer & Inline Diff Preview**: Open bare links and local paths in the side pane, preview inline file diffs directly in conversation turns, stream huge videos/audio/PDFs/tables/fonts, and right-click to copy paths, reveal files or insert references.
@@ -189,7 +189,7 @@ obsidian-prism/
 ├── assets/                             # Vector plugin icon & documentation screenshots
 ├── cdp.js / inject.js / remove.js      # Zero-eval LZSS compiler, on-demand disk cache & attach/removal
 ├── style.css                           # Four themes, Smoked Obsidian surfaces & workbench styles
-├── i18n-locales.js / i18n-core.js      # 9-language localization tables (zh-CN/zh-TW/en/ja/ko/es/fr/de/tr)
+├── i18n-locales.js / i18n-core.js      # 10-language localization tables (zh-CN/zh-TW/en/ja/ko/es/fr/de/tr/ru)
 ├── motion-engine.js / animated-icons.js# 4-tier damped spring physics & animated UI icons
 ├── ripple-core.js / conv-aura.js       # 300Hz split-rate WebGL2 horizon shader & 0fps semantic cues
 ├── smooth-caret.js / dual-mascot-rig.js# Read/write-separated caret tracking & pixel mascot rig

@@ -18,7 +18,7 @@ const hostI18nRuntime = require(path.join(ROOT, 'vendor/host-i18n/host-i18n-runt
 const reversePatterns = require(path.join(ROOT, 'vendor/host-i18n/reverse-patterns.js'));
 const zhDict = JSON.parse(fs.readFileSync(path.join(ROOT, 'vendor/host-i18n/zh-CN.json'), 'utf8'));
 
-const SUPPORTED_8 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
+const SUPPORTED_8 = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
 const CJK_RE = /[\u4e00-\u9fff\u3400-\u4dbf]/;
 
 function createMiniDom(htmlLang = 'en') {
@@ -357,13 +357,13 @@ test('Battle 2 CI Guard: 100% 9-locale parity in i18n-locales.js and 0 CJK leaka
 
   for (const key of keys) {
     const row = i18nLocales.UI_TABLE[key];
-    assert.ok(Array.isArray(row) && row.length === 9, `UI_TABLE.${key} must have exactly 9 locales`);
-    for (let i = 0; i < 9; i++) {
+    assert.ok(Array.isArray(row) && row.length === 10, `UI_TABLE.${key} must have exactly 10 locales`);
+    for (let i = 0; i < 10; i++) {
       assert.equal(typeof row[i], 'string', `UI_TABLE.${key}[${i}] must be string`);
       assert.ok(row[i].trim().length > 0, `UI_TABLE.${key}[${i}] must be non-empty`);
     }
     // Pure EN / ES / FR / DE / TR must never leak CJK characters
-    for (const [idx, code] of [[2, 'en'], [5, 'es'], [6, 'fr'], [7, 'de'], [8, 'tr']]) {
+    for (const [idx, code] of [[2, 'en'], [5, 'es'], [6, 'fr'], [7, 'de'], [8, 'tr'], [9, 'ru']]) {
       assert.equal(
         CJK_RE.test(row[idx]),
         false,
@@ -372,7 +372,7 @@ test('Battle 2 CI Guard: 100% 9-locale parity in i18n-locales.js and 0 CJK leaka
     }
   }
 
-  for (const lang of ['en', 'es', 'fr', 'de', 'tr']) {
+  for (const lang of ['en', 'es', 'fr', 'de', 'tr', 'ru']) {
     const ui = i18nLocales.getUiStrings(lang);
     assert.equal(CJK_RE.test(ui.swarmSplitSub(68, 32)), false, `swarmSplitSub leaked CJK in ${lang}`);
     assert.equal(CJK_RE.test(ui.showMoreN(4)), false, `showMoreN leaked CJK in ${lang}`);
@@ -389,7 +389,7 @@ test('Battle 2 CI Guard: 100% 9-locale parity in i18n-locales.js and 0 CJK leaka
     const slice = i18nLocales.getRuntimeUiSlice(lang);
     assert.equal(slice.lang, lang);
     const bytes = Buffer.byteLength(JSON.stringify(slice), 'utf8');
-    assert.ok(bytes < 4096, `Runtime slice for ${lang} exceeded 4096 B: ${bytes}`);
+    assert.ok(bytes < 5120, `Runtime slice for ${lang} exceeded 5120 B: ${bytes}`);
   }
 });
 
@@ -417,9 +417,9 @@ test('Battle 2 Channel 1 Slimming (< 550 KB across all 9 language modes), SYNC_R
     assert.ok(bytes < 550_000, `Channel 1 (${lang}) exceeded 550,000 B budget: ${bytes} B`);
   }
 
-  // pulse-vial-bridge.js strict < 31,000 B
+  // pulse-vial-bridge.js strict < 31,400 B
   const pvbSize = fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size;
-  assert.ok(pvbSize < 31_000, `pulse-vial-bridge.js exceeded 31,000 B budget: ${pvbSize} B`);
+  assert.ok(pvbSize < 31_400, `pulse-vial-bridge.js exceeded 31,400 B budget: ${pvbSize} B`);
 
   // Mascot Channel 10: 0 B when off, non-empty when on
   assert.equal(cdp.shouldEnableMascot({ mascot: 'off' }), false);
@@ -614,7 +614,7 @@ test('Battle 2 Settings Panel: displays off-enforced chip and off-blocked amber 
       `EN settings panel leaked CJK: ${stripAllowedProperNouns(secEnforced.textContent)}`
     );
     const langBtns = secEnforced.querySelectorAll('button[data-ag-cs-key="language"]');
-    assert.equal(langBtns.length, 9, 'Must render exactly 9 language buttons (no yue)');
+    assert.equal(langBtns.length, 10, 'Must render exactly 10 language buttons (no yue)');
     assert.ok(
       secEnforced.textContent.includes(i18nLocales.getUiStrings('en').hostLocStatusEnforced),
       'Must show off-enforced status text'

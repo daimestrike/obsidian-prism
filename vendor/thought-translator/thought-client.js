@@ -90,6 +90,9 @@
     de: 'Original|Original ausblenden|MT-Fallback|KI nicht verfügbar; maschineller Fallback|Neu übersetzen|Übersetzung unvollständig|↻ Erneut|Übersetze…|KI-Feinschliff…|Streaming…|Abschluss…|Proxy oder Netzwerk nicht erreichbar|Rate-Limit (Abkühlung)|API-Schlüssel- oder Auth-Fehler|Zeitüberschreitung|Hintergrunddienst offline|Proxy-Fehler · Erneut|Rate-Limit · Erneut|Auth-Fehler · Erneut|Zeitlimit · Erneut|Offline · Erneut|Fehlgeschlagen · Erneut|Erste {0}k / {1}k Zeichen übersetzt'.split('|'),
     tr: 'Ham|Ham Gizle|Yedek|YZ kullanılamıyor; makine yedeği|Yeniden çevir|Çeviri tamamlanmadı|↻ Tekrar|Çevriliyor…|YZ iyileştiriyor…|Akışta…|Sonlanıyor…|Proxy veya ağ erişilemiyor|Hız sınırı (beklemede)|API anahtarı veya kimlik hatası|Çeviri zaman aşımına uğradı|Arka plan servisi çevrimdışı|Proxy hatası · Tekrar|Hız sınırı · Tekrar|Kimlik hatası · Tekrar|Zaman aşımı · Tekrar|Çevrimdışı · Tekrar|Başarısız · Tekrar|İlk {0}k / {1}k karakter çevrildi'.split('|'),
   };
+try{globalThis.__agThRu||require('./thought-client-i18n-ru.js')}catch{}
+  if(globalThis.__agThRu)CLIENT_I18N.ru=String(globalThis.__agThRu).split('|');
+
 
   const memCache = new Map();
   if (W.__agPrismThought && W.__agPrismThought.__memCache instanceof Map) {
@@ -330,6 +333,7 @@
     if (/^fr(?:\b|-)/.test(s) || s === 'french') return 'fr';
     if (/^de(?:\b|-)/.test(s) || s === 'german') return 'de';
     if (/^tr(?:\b|-)/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+    if (/^ru/.test(s) || s === 'русский') return 'ru';
     if (/^en(?:\b|-)/.test(s) || s === 'english') return 'en';
     return '';
   }

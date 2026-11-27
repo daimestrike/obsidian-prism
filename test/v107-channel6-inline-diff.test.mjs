@@ -339,13 +339,13 @@ test('Channel 6 participates in 6-Channel .bundle-cache.json with SHA-256 invali
 });
 
 test('Channel 1 size budget, Channel 6 XSS/CSS hygiene, A3 attrs, and C#/Swift Channel 6 parity', () => {
-  // 1) Channel 1 size budget <= 686,080 B and < 704,000 B + pulse-vial-bridge < 31,000 B
+  // 1) Channel 1 size budget <= 686,080 B and < 704,000 B + pulse-vial-bridge < 31,400 B
   const ch1Expr = cdp.buildInjectExpression(cdp.DEFAULT_CONFIG);
   const ch1Bytes = Buffer.byteLength(ch1Expr, 'utf8');
   assert.ok(ch1Bytes <= 686080, `Channel 1 must stay <= 686,080 B, got ${ch1Bytes} B`);
   assert.ok(ch1Bytes < 704000, `Channel 1 must stay < 704,000 B, got ${ch1Bytes} B`);
   const pvBytes = fs.statSync(path.join(ROOT, 'pulse-vial-bridge.js')).size;
-  assert.ok(pvBytes < 31000, `pulse-vial-bridge.js must stay < 31,000 B, got ${pvBytes} B`);
+  assert.ok(pvBytes < 31400, `pulse-vial-bridge.js must stay < 31,400 B, got ${pvBytes} B`);
 
   // 2) style.css redlines
   const styleCss = fs.readFileSync(path.join(ROOT, 'style.css'), 'utf8');

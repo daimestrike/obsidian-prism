@@ -6,6 +6,8 @@ const { CHANNEL_TEARDOWN_MAP } = require('./channel-teardowns.cjs');
 
 // Ch8 3D 元素周期表模块文件清单（唯一声明源，打破 registry <-> builders-studio 环依赖）
 const PERIODIC_PICKER_MODULE_FILES = Object.freeze([
+  'picker-i18n-ru.js',
+  'bento-i18n-ru.js',
   'pbr-grain-assets.js',
   'audio-fx.js',
   'model-catalog.js',
@@ -79,7 +81,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
   defineSpec({
     id: 'omni', cacheFormat: 'minCode', channelNumber: 2, order: 20, tier: 'core', topLevelPack: true,
     label: 'Omni File Viewer', configKeys: ['omniModule', 'linkTarget'],
-    files: ['vendor/omni-viewer/omni-client.js'], mountGlobal: '__agPrismOmni', bindingConst: 'OMNI_BINDING',
+    files: ['vendor/omni-viewer/omni-client-i18n-ru.js', 'vendor/omni-viewer/omni-client.js'], mountGlobal: '__agPrismOmni', bindingConst: 'OMNI_BINDING',
     probeHashKey: '', probeExtraKeys: ['hasOmniBridge', 'hasOmniServerMeta'], hashMode: 'none', budgetBytes: 80 * 1024,
     probeLines: [
       "hasOmniBridge: Boolean(window.__agPrismOmniBridge && typeof window.__agPrismOmniBridge.call === 'function')",
@@ -115,7 +117,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
   defineSpec({
     id: 'hostI18n', cacheFormat: 'runtimeAndDict', channelNumber: 4, order: 40, tier: 'i18n',
     label: 'Host UI Localization', configKeys: ['hostLocalization', 'language'],
-    files: ['vendor/host-i18n/reverse-patterns.js', 'vendor/host-i18n/host-i18n-runtime.js', 'vendor/host-i18n/zh-CN.json', 'vendor/host-i18n/tr.json'],
+    files: ['vendor/host-i18n/reverse-patterns.js', 'vendor/host-i18n/host-i18n-runtime.js', 'vendor/host-i18n/zh-CN.json', 'vendor/host-i18n/tr.json', 'vendor/host-i18n/ru.json'],
     mountGlobal: '__agPrismHostI18n', respectSkippedByLiveCfg: true, budgetBytes: 560 * 1024,
     probeLines: [
       'hasHostI18n: Boolean(window.__agPrismHostI18n)',
@@ -133,7 +135,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
     id: 'swarmI18n', cacheFormat: 'runtimeAndDict', channelNumber: 4.5, order: 45, tier: 'i18n',
     injectMode: 'oopif-swarm', precompileOnBoot: false,
     label: 'Swarm Board Localization', configKeys: ['hostLocalization', 'language'],
-    files: ['vendor/host-i18n/swarm-i18n-runtime.js', 'vendor/host-i18n/swarm-zh-CN.json', 'vendor/host-i18n/swarm-tr.json'],
+    files: ['vendor/host-i18n/swarm-i18n-runtime.js', 'vendor/host-i18n/swarm-zh-CN.json', 'vendor/host-i18n/swarm-tr.json', 'vendor/host-i18n/swarm-ru.json'],
     mountGlobal: '__agPrismSwarmI18n', probeKey: '', probeHashKey: '', probeExpr: '', budgetBytes: 48 * 1024,
     fieldOverrides: {
       hashSrcField: '', scriptField: '', mountedField: '', sigField: '', scriptSigField: '',
@@ -147,6 +149,8 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
     id: 'thought', cacheFormat: 'clientAndUi', channelNumber: 5, order: 50, tier: 'addon', topLevelPack: true,
     label: 'Thought Stream Translator', configKeys: ['thoughtTranslate', 'thoughtTrigger', 'thoughtView'],
     files: [
+      'vendor/thought-translator/thought-client-i18n-ru.js',
+      'vendor/thought-translator/thought-settings-i18n-ru.js',
       'vendor/thought-translator/tool-step-verbs.js',
       'vendor/thought-translator/thought-client.js',
       'vendor/thought-translator/thought-settings-ui.js',
@@ -173,7 +177,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
   }),
   defineSpec({
     id: 'inlineDiff', cacheFormat: 'minCode', channelNumber: 6, order: 60, tier: 'core', topLevelPack: true,
-    label: 'Inline Diff Preview', files: ['vendor/inline-diff/inline-diff-client.js'],
+    label: 'Inline Diff Preview', files: ['vendor/inline-diff/inline-diff-i18n-ru.js', 'vendor/inline-diff/inline-diff-client.js'],
     mountGlobal: '__agPrismInlineDiff', bindingConst: 'INLINE_DIFF_BINDING',
     probeHashKey: '', tracksSkippedNonHost: true, budgetBytes: 56 * 1024,
     probeExpr: 'hasInlineDiff: Boolean(window.__agPrismInlineDiff && !window.__agPrismInlineDiff.getDebugState?.()?.destroyed)',
@@ -188,7 +192,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
   defineSpec({
     id: 'wallpaper', cacheFormat: 'clientAndUi', channelNumber: 7, order: 70, tier: 'studio', topLevelPack: true,
     label: 'Background Wallpaper Studio',
-    files: ['vendor/wallpaper/wallpaper-client.js', 'vendor/wallpaper/wallpaper-settings-ui.js'],
+    files: ['vendor/wallpaper/wallpaper-i18n-ru.js', 'vendor/wallpaper/wallpaper-client.js', 'vendor/wallpaper/wallpaper-settings-ui.js'],
     mountGlobal: '__agPrismWallpaper', bindingConst: 'WALLPAPER_BINDING',
     probeExtraKeys: ['hasWallpaperUi'], tracksSkippedNonHost: true, budgetBytes: 64 * 1024,
     probeLines: [
@@ -230,12 +234,12 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
     label: 'Settings Panel & Full Locales',
     configKeys: ['language', 'performanceMode', 'ignoreReducedMotion', 'chatFont', 'chatFontCustom', 'codeFont', 'codeFontCustom', 'telemetryQuotaMode'],
     files: [
-      'src/runtime/i18n-tr-locale.js', 'i18n-locales.js', 'assets/brand-mark-svg.js', 'vendor/clawd-mascot/tavern-atlas-data.js',
+      'src/runtime/i18n-tr-locale.js', 'src/runtime/i18n-ru-locale.js', 'src/runtime/i18n-ru-surfaces.js', 'i18n-locales.js', 'assets/brand-mark-svg.js', 'vendor/clawd-mascot/tavern-atlas-data.js',
       'vendor/clawd-mascot/octopath-stage-webgl.js', 'src/runtime/i18n-ext-beta4.js',
       'settings-panel.js', 'src/runtime/settings-ext-beta4.js',
     ],
     mountGlobal: '__agPrismSettingsPanel', probeKey: 'hasSettingsPanel',
-    probeExtraKeys: ['needsSettingsChannel'], budgetBytes: 500 * 1024,
+    probeExtraKeys: ['needsSettingsChannel'], budgetBytes: 530 * 1024,
     probeLines: [
       'hasSettingsPanel: Boolean((window.__agPrismSettingsPanel || globalThis.__agPrismSettingsPanel) && window.__agCsLocales && window.__agCsLocales.__isFullLocales)',
       "hasSettingsDialog: Boolean(document.querySelector('[role=\"dialog\"]') || document.getElementById('ag-cs-settings-sec'))",
@@ -268,7 +272,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
   defineSpec({
     id: 'suggester', cacheFormat: 'clientAndUi', channelNumber: 11, order: 110, tier: 'addon', topLevelPack: true,
     label: 'Prompt Suggester',
-    files: ['vendor/prompt-suggester/suggester-client.js', 'vendor/prompt-suggester/suggester-settings-ui.js'],
+    files: ['vendor/prompt-suggester/suggester-i18n-ru.js', 'vendor/prompt-suggester/suggester-client.js', 'vendor/prompt-suggester/suggester-settings-ui.js'],
     mountGlobal: '__agPrismSuggester', bindingConst: 'SUGGESTER_BINDING',
     probeHashKey: '', probeExtraKeys: ['hasSuggesterUi'], tracksSkippedNonHost: true, budgetBytes: 72 * 1024,
     probeLines: [
@@ -287,7 +291,7 @@ const CHANNEL_STATIC_SPECS = Object.freeze([
     id: 'homeStudio', channelNumber: 12, order: 120, tier: 'studio',
     label: 'Home Studio Dashboard', configKeys: ['homeLayout'], files: ['usage-core.js', 'home-studio-panel.js'],
     mountGlobal: '__agPrismHomeStudioPanel', probeExtraKeys: ['needsHomeStudioChannel'],
-    respectSkippedByLiveCfg: true, budgetBytes: 56 * 1024,
+    respectSkippedByLiveCfg: true, budgetBytes: 57 * 1024,
     probeLines: [
       'hasHomeStudio: Boolean(window.__agPrismHomeStudioPanel || globalThis.__agPrismHomeStudioPanel || window.__agHomeStudioPanel || globalThis.__agHomeStudioPanel)',
       "homeStudioCodeHash: String((window.__agPrismHomeStudioPanel || globalThis.__agPrismHomeStudioPanel || window.__agHomeStudioPanel || globalThis.__agHomeStudioPanel)?.__prismCodeHash || '')",

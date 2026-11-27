@@ -28,6 +28,8 @@
     tr:
       'Sonraki istemi öner (Beta)|Deneysel, varsayılan olarak kapalıdır. Her yanıt tamamlandığında (arka plan görevleri dahil) boş giriş kutusunda sonraki mesajınızı tahmin eder. Kullanmak için Tab tuşuna basın.|Açık|Kapalı|OpenAI Uç Nokta Profilleri|Birincil OpenAI Profili|Profil|+ Yeni|Sil|Profil Adı|örn. Gemini AI Studio / Ana Ağ Geçidi|Base URL|API Anahtarı|Model ID|Modelleri Getir|Ayarları Kaydet|Test Mesajı Gönder|Önbelleği Temizle|Temizle|Temizlenmeyi bekliyor|Yerel uç nokta için isteğe bağlı|Anahtarsız OK|Kaydedildi {0} (korumak için boş bırakın)|▾ {0} model arasından hızlı seç…|Önbellek: {0}|Üst akış /models alınıyor…|✓ {0} model yüklendi · {1}ms|Modeller alınamadı|Yapılandırma kaydediliyor…|✓ Kaydedildi ({0} · {1})|Kaydetme başarısız|Uç nokta gecikmesi test ediliyor…|✓ Bağlandı · {0}ms · {1} Yanıt: "{2}"|Bağlantı testi başarısız|✓ İstem öneri önbelleği temizlendi|Yalnızca sağlayıcı kimlik bilgileri (Ad, Base URL, API Anahtarı) senkronize edilir; profil başına seçilen Model ID, Düşünce Çevirmeni’nden bağımsız kaydedilir.|Öneri Geçerlilik Süresi|{0} dk',
   };
+try{globalThis.__agSugRu||require('./suggester-i18n-ru.js')}catch{}
+  if(globalThis.__agSugRu)I18N_ROWS.ru=globalThis.__agSugRu;
 
   const fmt = (tpl, args) => String(tpl || '').replace(/\{(\d)\}/g, (_, i) => String(args[i] ?? ''));
 
@@ -52,6 +54,7 @@
     if (/^fr(?:\b|-)/.test(s) || s === 'french') return 'fr';
     if (/^de(?:\b|-)/.test(s) || s === 'german') return 'de';
     if (/^tr(?:\b|-)/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+    if (/^ru/.test(s) || s === 'русский') return 'ru';
     if (/^en(?:\b|-)/.test(s) || s === 'english') return 'en';
     return '';
   }

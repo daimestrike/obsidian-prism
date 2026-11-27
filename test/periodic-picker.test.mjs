@@ -12,6 +12,8 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PERIODIC_PICKER_DIR = path.join(ROOT_DIR, 'vendor', 'periodic-picker');
 const PERIODIC_MODULE_ORDER = [
+  'picker-i18n-ru.js',
+  'bento-i18n-ru.js',
   'pbr-grain-assets.js',
   'audio-fx.js',
   'model-catalog.js',

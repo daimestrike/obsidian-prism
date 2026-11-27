@@ -249,6 +249,7 @@ test('normalizeLanguage, LANG_OPTIONS, and UI_TABLE support all 9 required langu
       ['fr', 'Français'],
       ['de', 'Deutsch'],
       ['tr', 'Türkçe'],
+      ['ru', 'Русский'],
     ]
   );
 
@@ -269,16 +270,19 @@ test('normalizeLanguage, LANG_OPTIONS, and UI_TABLE support all 9 required langu
   assert.equal(i18nCore.normalizeLanguage('tr-TR'), 'tr');
   assert.equal(i18nCore.normalizeLanguage('turkish'), 'tr');
   assert.equal(i18nCore.normalizeLanguage('türkçe'), 'tr');
+  assert.equal(i18nCore.normalizeLanguage('ru-RU'), 'ru');
+  assert.equal(i18nCore.normalizeLanguage('russian'), 'ru');
+  assert.equal(i18nCore.normalizeLanguage('русский'), 'ru');
   assert.equal(i18nCore.normalizeLanguage(true), 'zh-CN');
   assert.equal(i18nCore.normalizeLanguage(false), 'en');
   for (const cjkLang of ['zh-CN', 'zh-TW', 'ja', 'ko']) {
     assert.equal(i18nCore.isCjkLanguage(cjkLang), true, `isCjkLanguage(${cjkLang}) must be true`);
   }
-  for (const latinLang of ['en', 'es', 'fr', 'de', 'tr']) {
+  for (const latinLang of ['en', 'es', 'fr', 'de', 'tr', 'ru']) {
     assert.equal(i18nCore.isCjkLanguage(latinLang), false, `isCjkLanguage(${latinLang}) must be false`);
   }
 
-  for (const lang of ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr']) {
+  for (const lang of ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru']) {
     const ui = i18nLocales.getUiStrings(lang);
     assert.ok(ui.setLanguageTitle);
     assert.ok(ui.setLanguageDesc);

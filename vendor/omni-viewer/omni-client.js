@@ -63,6 +63,8 @@
     omniHintClick: ['单击', '單擊', 'Click', 'クリック', '클릭', 'Clic', 'Clic', 'Klick', 'Tıkla'],
     omniHintCtrlClick: ['Ctrl+单击', 'Ctrl+單擊', 'Ctrl+Click', 'Ctrl+クリック', 'Ctrl+클릭', 'Ctrl+Clic', 'Ctrl+Clic', 'Strg+Klick', 'Ctrl+Tıkla'],
   };
+try{globalThis.__agOmniRu||require('./omni-client-i18n-ru.js')}catch{}
+  if(globalThis.__agOmniRu){LANG_INDEX.ru=9;for(const k in globalThis.__agOmniRu)if(FALLBACK_ROWS[k])FALLBACK_ROWS[k].push(globalThis.__agOmniRu[k]);}
 
   const PREVIEW_KIND_BY_EXT = {
     mp4: 'video', webm: 'video', mov: 'video', m4v: 'video', mkv: 'video', ogv: 'video',
@@ -180,6 +182,7 @@
     if (/^fr\b/.test(s) || s === 'french') return 'fr';
     if (/^de\b/.test(s) || s === 'german') return 'de';
     if (/^tr\b/.test(s) || s === 'turkish' || s === 'türkçe' || s === 'turkce') return 'tr';
+    if (/^ru/.test(s) || s === 'русский') return 'ru';
     if (/^en\b/.test(s) || s === 'english') return 'en';
     return '';
   }

@@ -766,9 +766,10 @@ test('W5-4: 0 innerHTML, 0 :has(), pure ASCII CSS, 8-locale 0-CJK leak, 0 BOM/CR
 
   // 9-locale completeness & 0 CJK in non-CJK locales for all DIFF_FALLBACK keys (including expand-all copy)
   const clientSrc = fs.readFileSync(path.join(ROOT, 'vendor/inline-diff/inline-diff-client.js'), 'utf8');
+  const ruDiff = require(path.join(ROOT, 'vendor/inline-diff/inline-diff-i18n-ru.js'));
   const CJK_RE = /[\u3400-\u9FFF\uF900-\uFAFF]/;
-  const LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr'];
-  const NON_CJK = ['en', 'ko', 'es', 'fr', 'de', 'tr'];
+  const LOCALES = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
+  const NON_CJK = ['en', 'ko', 'es', 'fr', 'de', 'tr', 'ru'];
   for (const key of [
     'inlineDiffOpenSidebar', 'inlineDiffCollapse', 'inlineDiffLoading', 'inlineDiffBinary',
     'inlineDiffNoPreview', 'inlineDiffSensitive', 'inlineDiffSnapshotNotice', 'inlineDiffLongLinesTag',
@@ -778,10 +779,10 @@ test('W5-4: 0 innerHTML, 0 :has(), pure ASCII CSS, 8-locale 0-CJK leak, 0 BOM/CR
     const km = new RegExp(`${key}\\s*:\\s*\\{([^\\n]+)\\}`).exec(clientSrc);
     assert.ok(km, `DIFF_FALLBACK missing key ${key}`);
     for (const loc of LOCALES) {
-      const lm = new RegExp(`['"]?${loc}['"]?\\s*:\\s*'([^']+)'`).exec(km[1]);
-      assert.ok(lm && lm[1].length > 0, `DIFF_FALLBACK.${key}[${loc}] missing`);
+      const val = loc === 'ru' ? ruDiff[key] : (new RegExp(`['"]?${loc}['"]?\\s*:\\s*'([^']+)'`).exec(km[1]) || [])[1];
+      assert.ok(val && val.length > 0, `DIFF_FALLBACK.${key}[${loc}] missing`);
       if (NON_CJK.includes(loc)) {
-        assert.equal(CJK_RE.test(lm[1]), false, `DIFF_FALLBACK.${key}[${loc}] leaked CJK: ${lm[1]}`);
+        assert.equal(CJK_RE.test(val), false, `DIFF_FALLBACK.${key}[${loc}] leaked CJK: ${val}`);
       }
     }
   }

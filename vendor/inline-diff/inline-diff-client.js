@@ -339,6 +339,8 @@ inlineDiffExpandAll:{'zh-CN':'展开全部（剩余 {n} 行）','zh-TW':'展開�
 inlineDiffExpandAllPlain:{'zh-CN':'展开全部','zh-TW':'展開全部',en:'Expand all',ja:'すべて展開',ko:'전체 펼치기',es:'Expandir todo',fr:'Tout déplier',de:'Alle ausklappen',tr:'Tümünü genişlet'},
 inlineDiffCumulativeNotice:{'zh-CN':'工作区累计改动 (+{a} -{d}) · 单步精确对比请点右上角在侧栏打开','zh-TW':'工作區累計改動 (+{a} -{d}) · 單步精確對比請點右上角在側欄開啟',en:'Working-tree cumulative diff (+{a} -{d}) · click top-right to view exact step diff in Sidebar',ja:'作業ツリーの累積差分 (+{a} -{d}) · 単一ステップの正確な差分は右上からサイドバーで開けます',ko:'작업 트리 누적 변경 (+{a} -{d}) · 단계별 정확한 차이는 우측 상단에서 사이드바로 여세요',es:'Diff acumulado del árbol (+{a} -{d}) · haz clic arriba a la derecha para ver el paso exacto',fr:'Diff cumulé de l’espace (+{a} -{d}) · cliquez en haut à droite pour le diff exact',de:'Kumulierter Arbeitsbaum-Diff (+{a} -{d}) · oben rechts für exakten Schritt-Diff öffnen',tr:'Çalışma ağacı toplam diff’i (+{a} -{d}) · tam adım farkı için sağ üstten kenar çubuğunda açın'},
 };
+try{globalThis.__agDiffRu||require('./inline-diff-i18n-ru.js')}catch{}
+if(globalThis.__agDiffRu)for(const k in globalThis.__agDiffRu)if(DIFF_FALLBACK[k])DIFF_FALLBACK[k].ru=globalThis.__agDiffRu[k];
 
 function createInlineDiffClient(options = {}) {
 const doc = options.doc || options.document || (typeof document !== 'undefined' ? document : null);
@@ -367,6 +369,7 @@ if (/^es/.test(s) || s === 'spanish') return 'es';
 if (/^fr/.test(s) || s === 'french') return 'fr';
 if (/^de/.test(s) || s === 'german') return 'de';
 if (/^tr/.test(s) || s === 'turkish' || s === 'türkçe' || s === 'turkce') return 'tr';
+if (/^ru/.test(s)) return 'ru';
 return 'en';
 };
 const getLang = () => {

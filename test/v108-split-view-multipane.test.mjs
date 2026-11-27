@@ -326,11 +326,11 @@ test('Issue #62 CSS & Budget Gate: tiling-splitter transparent hitbox + ::before
   assert.equal(css.includes('-webkit-mask:var(--_m0)'), false, '0 Chromium CSSOM -webkit-mask:var(--_m0) trap');
   assert.equal(css.includes('background:var(--_x0)'), false, '0 Chromium CSSOM background:var(--_x0) trap');
 
-  // pulse-vial-bridge.js strict < 31,000 B & 0 innerHTML
+  // pulse-vial-bridge.js strict < 31,400 B & 0 innerHTML
   const pvbPath = path.join(ROOT, 'pulse-vial-bridge.js');
   const pvbBuf = fs.readFileSync(pvbPath);
   const pvbTxt = pvbBuf.toString('utf8');
-  assert.ok(pvbBuf.length < 31000, `pulse-vial-bridge.js must stay < 31,000 B, got ${pvbBuf.length}`);
+  assert.ok(pvbBuf.length < 31400, `pulse-vial-bridge.js must stay < 31,400 B, got ${pvbBuf.length}`);
   assert.equal(pvbTxt.includes('\r'), false);
   assert.equal(/innerHTML|outerHTML|insertAdjacentHTML/.test(pvbTxt), false);
 

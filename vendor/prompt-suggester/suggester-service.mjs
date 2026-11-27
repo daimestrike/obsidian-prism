@@ -89,6 +89,7 @@ function normalizeSuggesterLang(raw, defaultLang = 'en') {
   if (/^fr(?:\b|-)/.test(s) || s === 'french') return 'fr';
   if (/^de(?:\b|-)/.test(s) || s === 'german') return 'de';
   if (/^tr(?:\b|-)/.test(s) || s === 'turkish' || s === 'türkçe') return 'tr';
+  if (/^ru(?:\b|-)/.test(s) || s === 'russian' || s === 'русский') return 'ru';
   if (/^en(?:\b|-)/.test(s) || s === 'english') return 'en';
   return defaultLang;
 }
@@ -385,6 +386,7 @@ function buildSamplingInstruction(lang = 'en') {
     fr: 'French (Français)',
     de: 'German (Deutsch)',
     tr: 'Turkish (Türkçe)',
+    ru: 'Russian (Русский)',
   };
   const normLang = normalizeSuggesterLang(lang, 'en');
   const langLabel = langLabelMap[normLang] || langLabelMap.en;

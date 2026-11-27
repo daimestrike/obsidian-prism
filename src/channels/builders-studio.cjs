@@ -23,7 +23,9 @@ function createStudioChannelBuilders({ rootDir, readConfig, bundleCache }) {
     if (!fs.existsSync(clientPath) || !fs.existsSync(settingsUiPath)) {
       return { sig: '', minClient: '', minSettingsUi: '', codeHash: '' };
     }
-    const sig = `${getFileSig(clientPath)}|${getFileSig(settingsUiPath)}`;
+    const ruPath = path.join(rootDir, 'vendor', 'wallpaper', 'wallpaper-i18n-ru.js');
+    const hasRu = fs.existsSync(ruPath);
+    const sig = `${getFileSig(clientPath)}|${getFileSig(settingsUiPath)}|${hasRu ? getFileSig(ruPath) : '0'}`;
     const cachePath = resolveBundleCachePathOption(opts);
     const curMem = bundleCache.getChannelMemCache('wallpaper');
     if (!cachePath && curMem && curMem.sig === sig && curMem.codeHash) {
@@ -33,13 +35,15 @@ function createStudioChannelBuilders({ rootDir, readConfig, bundleCache }) {
       channelName: 'wallpaper',
       sig,
       fileEntries: [
+        ...(hasRu ? [{ rel: 'vendor/wallpaper/wallpaper-i18n-ru.js', fullPath: ruPath }] : []),
         { rel: 'vendor/wallpaper/wallpaper-client.js', fullPath: clientPath },
         { rel: 'vendor/wallpaper/wallpaper-settings-ui.js', fullPath: settingsUiPath },
       ],
       opts,
       compileFn: () => {
         const minClient = minifySingleSource(fs.readFileSync(clientPath, 'utf8'), { allowMemberProps: false });
-        const minSettingsUi = minifySingleSource(fs.readFileSync(settingsUiPath, 'utf8'), { allowMemberProps: false });
+        const ruSrc = hasRu ? fs.readFileSync(ruPath, 'utf8').trim() : '';
+        const minSettingsUi = `${ruSrc ? `${ruSrc};\n` : ''}${minifySingleSource(fs.readFileSync(settingsUiPath, 'utf8'), { allowMemberProps: false })}`;
         const codeHash = computeHash(`${minClient}\n${minSettingsUi}`);
         return { minClient, minSettingsUi, codeHash };
       },
