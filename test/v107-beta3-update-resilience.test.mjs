@@ -839,9 +839,13 @@ test('任务 2 & 3: 四端 --purge-data 补齐 obsidian-prism-wallpaper.json（�
   assert.ok(winSetup.includes('"obsidian-prism-wallpaper.json"'), 'Windows Setup --purge-data must include obsidian-prism-wallpaper.json');
   assert.ok(macSetup.includes('"obsidian-prism-wallpaper.json"'), 'macOS Setup --purge-data must include obsidian-prism-wallpaper.json');
 
-  // 3) README.md & README.en.md AI 代装规范与思考翻译自检核验
-  const readmeZh = fs.readFileSync(path.join(ROOT_DIR, 'README.md'), 'utf8');
+  // 3) README.md (Russian), docs/README.zh-CN.md (Chinese) & README.en.md (English) AI install & thought-translator checklist
+  const readmeRu = fs.readFileSync(path.join(ROOT_DIR, 'README.md'), 'utf8');
+  const readmeZh = fs.readFileSync(path.join(ROOT_DIR, 'docs', 'README.zh-CN.md'), 'utf8');
   const readmeEn = fs.readFileSync(path.join(ROOT_DIR, 'README.en.md'), 'utf8');
+  assert.ok(readmeRu.includes('npm run install:plugin') && readmeRu.includes('node tools/install-plugin.cjs --status'));
+  assert.ok(readmeRu.includes('Не используйте `npm run inject`'));
+  assert.ok(readmeRu.includes('Диагностика в 1 клик'));
   assert.ok(readmeZh.includes('npm run install:plugin') && readmeZh.includes('node tools/install-plugin.cjs --status'));
   assert.ok(readmeZh.includes('严禁仅执行 `npm run inject`'));
   assert.ok(readmeZh.includes('一键诊断'));

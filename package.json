@@ -1,17 +1,17 @@
 {
   "name": "obsidian-prism",
   "version": "1.0.8-beta.4",
-  "description": "Obsidian Prism (黑曜棱镜) — Optical UI & Motion Suite for Antigravity. Unified 4-tier spring choreography, daylight crystal themes, 512K telemetry vial, reasoning effort slider, and dual-mode thought translator.",
+  "description": "Obsidian Prism (Русская версия / форк RMvdesi/obsidian-prism) — оптический интерфейс, пружинная физика, темы, 512K-колба контекста, слайдер рассуждений и переводчик мыслей для Antigravity с полной локализацией на русский язык.",
   "license": "GPL-3.0-only",
   "author": "RMvdesi",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RMvdesi/obsidian-prism.git"
+    "url": "git+https://github.com/daimestrike/obsidian-prism.git"
   },
-  "homepage": "https://github.com/RMvdesi/obsidian-prism#readme",
+  "homepage": "https://github.com/daimestrike/obsidian-prism#readme",
   "bugs": {
-    "url": "https://github.com/RMvdesi/obsidian-prism/issues"
+    "url": "https://github.com/daimestrike/obsidian-prism/issues"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -23,7 +23,9 @@
     "spring-motion",
     "webgl2",
     "telemetry",
-    "thought-translator"
+    "thought-translator",
+    "russian",
+    "i18n"
   ],
   "scripts": {
     "test": "node --test test/*.test.mjs test/gates/*.test.mjs",

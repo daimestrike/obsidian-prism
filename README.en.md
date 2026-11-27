@@ -2,19 +2,19 @@
 
 <img src="assets/logo.svg" width="96" height="96" alt="Obsidian Prism Logo" />
 
-# Obsidian Prism
+# Obsidian Prism · Russian Edition
 
-**A native optical UI suite for Google Antigravity**
+**Russian-localized fork of the native optical UI suite for Google Antigravity**
 
-Four dark & daylight themes · A living 512K context vial · Reasoning effort slider · Pixel companions · Custom Static / Video Wallpaper (Beta) · Chat Mode (Beta)
+Four dark & daylight themes · A living 512K context vial · Reasoning effort slider · Pixel companions · Custom Static / Video Wallpaper (Beta) · Chat Mode (Beta) · Full Russian UI localization (`ru`)
 
-[**简体中文**](./README.md) · [**English**](./README.en.md) · [**Changelog**](./CHANGELOG.md) · [**Releases**](https://github.com/RMvdesi/obsidian-prism/releases) · [**Issues**](https://github.com/RMvdesi/obsidian-prism/issues)
+[**Русский**](./README.md) · [**English**](./README.en.md) · [**简体中文**](./docs/README.zh-CN.md) · [**Changelog**](./CHANGELOG.md) · [**Issues**](https://github.com/daimestrike/obsidian-prism/issues) · [**Upstream**](https://github.com/RMvdesi/obsidian-prism)
 
 <p>
-  <a href="https://github.com/RMvdesi/obsidian-prism/releases"><img src="https://img.shields.io/github/v/release/RMvdesi/obsidian-prism?style=flat-square&color=3186ff&label=Release" alt="Latest Release" /></a>
+  <img src="https://img.shields.io/badge/Edition-Russian%20Edition%20(ru)-2563eb?style=flat-square" alt="Russian Edition" />
   <img src="https://img.shields.io/badge/Version-1.0.8--beta.4-0f172a?style=flat-square" alt="Version 1.0.8-beta.4" />
   <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20Universal-1e293b?style=flat-square" alt="Platform" />
-  <a href="https://github.com/RMvdesi/obsidian-prism/actions"><img src="https://img.shields.io/github/actions/workflow/status/RMvdesi/obsidian-prism/ci.yml?branch=main&style=flat-square&label=CI" alt="CI Status" /></a>
+  <a href="https://github.com/daimestrike/obsidian-prism/actions"><img src="https://img.shields.io/github/actions/workflow/status/daimestrike/obsidian-prism/ci.yml?branch=main&style=flat-square&label=CI" alt="CI Status" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-2563eb?style=flat-square" alt="License: GPL-3.0" /></a>
   <a href="./NOTICE"><img src="https://img.shields.io/badge/Attribution-Required%20(NOTICE)-8b5cf6?style=flat-square" alt="Attribution Required" /></a>
 </p>
@@ -28,6 +28,11 @@ Four dark & daylight themes · A living 512K context vial · Reasoning effort sl
 <sub>Footage is rendered frame by frame by an offline stage that runs this repository's front-end source directly. All workspaces and conversations shown are fictional.</sub>
 
 </div>
+
+> **About This Russian Edition Fork**
+>
+> Built upon [Obsidian Prism](https://github.com/RMvdesi/obsidian-prism) by [@RMvdesi](https://github.com/RMvdesi), licensed under [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html). Upstream component notices are preserved in [`NOTICE`](./NOTICE) and [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
+> This fork ([`daimestrike/obsidian-prism`](https://github.com/daimestrike/obsidian-prism)) is the **Russian Edition** adding Russian (`ru`) as a tenth first-class UI locale across settings, workbench, Omni viewer, Chat Mode, and Thought Translator (see [ADR-007](./docs/adr/ADR-007-tenth-locale-russian.md)), plus Russian documentation. It is an unofficial community fork and not an official unmodified release by `@RMvdesi`.
 
 > **Non-Affiliation & Trademark Disclaimer**
 >
@@ -132,20 +137,20 @@ Download the latest installer directly below (or browse all versions & Beta pre-
 >   xattr -cr "/Applications/Obsidian Prism.app"
 >   ```
 
-### Option B: Native Plugin Deployment from Source (Recommended for Developers)
+### Option B: Native Plugin Deployment from Source (Recommended for the Russian Edition)
 ```bash
-git clone https://github.com/RMvdesi/obsidian-prism.git
+git clone https://github.com/daimestrike/obsidian-prism.git
 cd obsidian-prism
 
 # Deploy to ~/.gemini/config/plugins/obsidian-prism and attach to running windows
 npm run install:plugin
 ```
-Then open **Settings → Appearance** in Antigravity to expand the **Obsidian Prism** control panel.
+Then open **Settings → Appearance** in Antigravity to expand the **Obsidian Prism** control panel and select **Русский** (or any of the 10 built-in languages).
 
 ### Standard AI-Assisted Install Workflow & Thought Translator Checklist
-If you ask an AI coding assistant (Claude Code, Cursor, Antigravity Agent, etc.) to install Obsidian Prism from source, **always run these two commands in order**:
+If you ask an AI coding assistant (Claude Code, Cursor, Antigravity Agent, etc.) to install this Russian Edition of Obsidian Prism from source, **always run these two commands in order**:
 ```bash
-git clone https://github.com/RMvdesi/obsidian-prism.git
+git clone https://github.com/daimestrike/obsidian-prism.git
 cd obsidian-prism
 
 # 1. Full local plugin deployment (syncs all modules and starts the persistent background daemon)

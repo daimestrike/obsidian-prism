@@ -1,7 +1,7 @@
 {
   "name": "obsidian-prism",
   "displayName": "Obsidian Prism",
-  "description": "Optical UI & Motion Suite for Antigravity — unified 4-tier spring choreography, daylight crystal themes, 512K telemetry vial, and effort slider.",
+  "description": "Русская версия Obsidian Prism — оптический интерфейс и пружинная анимация для Antigravity: 4 темы, 512K-колба контекста, слайдер рассуждений и локализация на русский язык.",
   "version": "1.0.8-beta.4",
   "logo": "assets/logo.svg"
 }
